@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let tagretNumber = Number(prompt("Insert a number: ")), factorial = 1;
+      do {
+        factorial *= tagretNumber;
+        tagretNumber--;
+      } while (tagretNumber > 0);
+      alert("Factorial: " + factorial);
+
+      let max, min, userNumber, tracker = 0;
+      do {
+        if (tracker == 0) {
+          max = Number(prompt("Please insert a number: "));
+          min = max;
+        } else {
+          userNumber = Number(prompt("Please insert a number: "));
+          if (userNumber < min) {
+            min = userNumber;
+          } else if (userNumber > max) {
+            max = userNumber;
+          }
+        }
+        tracker++;
+      } while (tracker < 5);
+      alert("The highst number was: " + max);
+      alert("The lowest number was: " + min);
+    </script>
+  </body>
+</html>
+

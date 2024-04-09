@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let max,
+        min,
+        userNumber,
+        tracker = 0;
+      max = Number(prompt("Please insert a number: "));
+      min = max;
+      while (tracker < 4) {
+        userNumber = Number(prompt("Please insert a number: "));
+        if (userNumber < min) {
+          min = userNumber;
+        } else if (userNumber > max) {
+          max = userNumber;
+        }
+        tracker++;
+      }
+      alert("The highst number was: " + max);
+      alert("The lowest number was: " + min);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let min = Number.MAX_VALUE, max = 0, userNumber;
+      while (true) {
+        userNumber = Number(prompt("Please insert a number, insert 0 or above in order to stop: "));
+        if (userNumber > 0) {
+            
+          if (userNumber < min) {
+            min = userNumber;
+          }
+          if (userNumber > max) {
+            max = userNumber;
+          }
+        } else {
+          break;
+        }
+      }
+      alert("Highest number was: " + max);
+      alert("Lowest number was: " + min);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="a.css" />
+  </head>
+  <body>
+    <h1>Hello World</h1>
+    <script>
+      let astrixToDisplay;
+      let astrixInRow = 5;
+      for (let row = 0; row < 5; row++) {
+        astrixToDisplay = "";
+        for (let i = 0; i < astrixInRow; i++) {
+          astrixToDisplay += "*";
+        }
+        console.log(astrixToDisplay);
+        astrixInRow -= 1;
+      }
+
+      let height, width;
+      while(true){
+        height = prompt("Please insert the height of the rectangle: ")
+        width = prompt("Please insert the width of the rectangle: ")
+        if(!isNaN(height) && !isNaN(width)){
+          height = Number(height);
+          width = Number(width);
+          break
+        } else {
+          alert("Sorry, one of your inputs wasnt a number!")
+        }
+      }
+      alert("The area of the rectangle is: "+ (height*width));
+      alert("The scope of the rectangle is: "+ (height+width)*2);
+    </script>
+  </body>
+</html>
+//git add -A 
+      //git commit -m ''
+      //git push

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const number = Number(prompt("Please enter a number (greater than 0): "));
+
+      if (number > 0) {
+        let numOfDigits = 0, numberDup = number;
+        while (numberDup != 0) {
+          numberDup = Math.floor(numberDup / 10);
+          numOfDigits++;
+        }
+
+        for (let i = 0; i < numOfDigits; i++) {
+          numberDup = number;
+          for (let j = 0; j < numOfDigits - i - 1; j++) {
+            // I left the desired digit to be handle by the modulo operation
+            numberDup = Math.floor(numberDup / 10);
+          }
+          console.log(numberDup % 10);
+        }
+      } else {
+        alert("The number should have been greater than 0");
+      }
+    </script>
+  </body>
+</html>

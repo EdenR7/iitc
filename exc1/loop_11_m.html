@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let numberToPredict = Math.floor(Math.random() * 99)+1;
+      let startTime = new Date();
+      let numOfGuesses = 0, currentGuess = Number(prompt("Please insert your guess: "));
+      do{
+        if (currentGuess != numberToPredict){
+          if(currentGuess > numberToPredict){
+            alert("You are above the number!");
+          } else {
+            alert("You are below the number!");
+          }
+          currentGuess = Number(prompt("Please insert your guess: "));
+          numOfGuesses ++;
+        }
+      }
+      while(currentGuess != numberToPredict);
+      let endTime = new Date();
+      let difference = (endTime - startTime)/1000;
+      alert("Well done, " +numberToPredict+" was the number! it took " + numOfGuesses+ " guesses in "+difference+" seconds");
+    </script>
+  </body>
+</html>
