@@ -154,6 +154,9 @@ function array_4_m(arr){
         for(let j = 0; j < arr.length; j++){
             if(numToCheck === arr[j]){
                 instancesCounter ++;
+                if (instancesCounter > 1){
+                    break;
+                }
             }
         }
         if(instancesCounter === 1){
@@ -163,7 +166,7 @@ function array_4_m(arr){
     }
     return unique
 }
-// console.log(array_4_m([1,6,7,6,8,9]))
+// console.log(array_4_m([1,6,7,6,8,10]))
 
 function js_string_1_b(str){
     return str.toUpperCase();
@@ -185,4 +188,13 @@ function js_string_3_b(str){
     }
     return maxLength;
 }
-console.log(js_string_3_b("key,value,key1,value1,key2,value22"));
+// console.log(js_string_3_b("key,value,key1,value1,key2,value22"));
+
+let a = 1, b = 2;
+function switch1(a1, b1){
+    let temp = a1;
+    a1 = b1;
+    b1 = temp;
+}
+switch1(a, b);
+console.log(a, b);
