@@ -88,7 +88,7 @@ function isTie(){
 function isGameOver(name){ // executing all the table validations, print the game result and also update the global roundResult variable
     // row check :
     for(let rowIndex = 0; rowIndex < myBoard.length ; rowIndex++){
-        if(isWinRow(rowIndex) == true){
+        if(isWinRow(rowIndex)){
             alert(`${name} is the winner!`);
             roundResult = name;
             return true;
@@ -96,25 +96,25 @@ function isGameOver(name){ // executing all the table validations, print the gam
     }
     // col check
     for(let colIndex = 0; colIndex < myBoard.length ; colIndex++){
-        if(isWinCol(colIndex) == true){
+        if(isWinCol(colIndex)){
             alert(`${name} is the winner!`);
             roundResult = name;
             return true;
         }
     }
     // diagonals
-    if(diagonalLTR() == true){
+    if(diagonalLTR()){
         alert(`${name} is the winner!`);
         roundResult = name;
         return true;
     }
-    if(diagonalRTL() == true){
+    if(diagonalRTL()){
         alert(`${name} is the winner!`);
         roundResult = name;
         return true;
     }
     // tie
-    if (isTie() == true){
+    if (isTie()){
         alert("Its a TIE !");
         roundResult = "Tie";
         return true;
@@ -122,7 +122,20 @@ function isGameOver(name){ // executing all the table validations, print the gam
     return false;
 }
 
-
+function randomizePick(names){
+    let firstPlayerIndex = generateRandomIndex();
+    let pl1Name = names[firstPlayerIndex], pl2Name = names[1-firstPlayerIndex];
+    alert(`${pl1Name} you will go first this round !`);
+    let pl1Marker = markers[firstPlayerIndex], pl2Marker = markers[1-firstPlayerIndex];
+    alert(`${pl1Name} you will play ${pl1Marker}!`);
+    alert(`${pl2Name} you will play ${pl2Marker}!`);
+    return{
+        firstPlayerName : pl1Name,
+        firstMarker : pl1Marker,
+        secondPlayerName : pl2Name,
+        secondMarker : pl2Marker
+    }
+}
 function isEmptySlot(rowIndex, colIndex){
     if(myBoard[rowIndex][colIndex] == "-"){
         return true;
@@ -130,7 +143,7 @@ function isEmptySlot(rowIndex, colIndex){
     return false;
 }
 function placeMarker(markerType, rowIndex, colIndex){ // gets the row and col indexes, if its an empy index it will mark it
-    if(isEmptySlot(rowIndex, colIndex) == true){
+    if(isEmptySlot(rowIndex, colIndex)){
         myBoard[rowIndex][colIndex] = markerType;
         alert(`Index ${rowIndex},${colIndex} has been marked!`);
     }else {
@@ -244,25 +257,20 @@ function main(){ // main function includes all the flow of the game
 
     let runGame = true;
     //Loop of all the game, stops at the end of a round that the user insert no 
-    while(runGame == true){
+    while(runGame){
         createBoard();
-        //Choose the first player randomly
-        let firstPlayerIndex = generateRandomIndex();
-        let pl1Name = playersNames[firstPlayerIndex], pl2Name = playersNames[1-firstPlayerIndex];
-        alert(`${pl1Name} you will go first this round !`);
-        //Choose the markers of the players randomly
-        let pl1Marker = markers[firstPlayerIndex], pl2Marker = markers[1-firstPlayerIndex];
-        alert(`${pl1Name} you will play ${pl1Marker}!`);
-        alert(`${pl2Name} you will play ${pl2Marker}!`);
+        let roundRandomPicks = randomizePick(playersNames);
+        let pl1Name = roundRandomPicks.firstPlayerName , pl1Marker = roundRandomPicks.firstMarker;
+        let pl2Name = roundRandomPicks.secondPlayerName , pl2Marker = roundRandomPicks.secondMarker;
 
         let endGame = false;
         let startTime = performance.now();
-        while(endGame == false){
+        while(!endGame){
             //Player 1 turn
             displayBoard();
             console.log(`${pl1Name} its your turn !`);
             let correctPick = false;
-            while(correctPick == false){
+            while(!correctPick){
                 let rowIndex = getRowIndex(`${pl1Name}, select the row index(0-${myBoard.length-1})`);
                 let colIndex = getColIndex(`${pl1Name}, select the col index(0-${myBoard.length-1})`);
                 correctPick = isEmptySlot(rowIndex, colIndex);
@@ -270,14 +278,14 @@ function main(){ // main function includes all the flow of the game
             }
             displayBoard();
             endGame = isGameOver(pl1Name);
-            if (endGame == true){
+            if (endGame){
                 //Stops the round at the middle of the loop if the round ended at the first player turn
                 break;
             }
             //Player 2 turn
             console.log(`${pl2Name} its your turn !`);
             correctPick = false;
-            while(correctPick == false){
+            while(!correctPick){
                 let rowIndex = getRowIndex(`${pl2Name}, select the row index(0-${myBoard.length-1})`);
                 let colIndex = getColIndex(`${pl2Name}, select the row index(0-${myBoard.length-1})`);
                 correctPick = isEmptySlot(rowIndex, colIndex);
