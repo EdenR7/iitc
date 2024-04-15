@@ -44,6 +44,15 @@ function getBook(booksArray, bookName){
     }
     return null;
 }
+function getBook2(booksArray, bookName){
+    const foundBook = booksArray.find((book) => book.name == bookName);
+    if (foundBook == undefined){
+        return null;
+    } else {
+        return foundBook;
+    }
+}
+console.log(getBook(myBooks, "White Feng"));
 // console.log(getBook(myBooks, "White Feng"));
 
 function updateBookPages (booksArray, bookName, bookPages){
@@ -66,20 +75,20 @@ function deleteBook (booksArray, bookName){
     }
     return null;
 }
-deleteBook(myBooks, "detoxification");
-displayBooks();
+// deleteBook(myBooks, "detoxification");
+// displayBooks();
 
-let numbersArr = [1,3,3,19];
-let targetNumber = Number(prompt("Please insert number to update:"));
-let found = false;
-numbersArr.forEach((number, index) => {
-    if(number == targetNumber){
-        numbersArr[index]++;
-        found = true;
-    }
-});
-if(found){
-    console.log(numbersArr);
-}else{
-    console.log("Number didnt found!");
-}
+// let numbersArr = [1,3,3,19];
+// let targetNumber = Number(prompt("Please insert number to update:"));
+// let found = false;
+// numbersArr.forEach((number, index) => {
+//     if(number == targetNumber){
+//         numbersArr[index]++;
+//         found = true;
+//     }
+// });
+// if(found){
+//     console.log(numbersArr);
+// }else{
+//     console.log("Number didnt found!");
+// }

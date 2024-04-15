@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="flex-group">
+    <div class="calculator-container grid-group">
+      <div class="input-field">
+        <div class="field-wrapper flex-group">
+          <button onclick="clearDisplayedScreen()" id="clear-button">CE</button>
+          <div id="screen"></div>
+        </div>
+      </div>
+      <div class="numbers-buttons">
+        <button onclick="addToScreen(event)" class="number-btn">7</button>
+        <button onclick="addToScreen(event)" class="number-btn">8</button>
+        <button onclick="addToScreen(event)" class="number-btn">9</button>
+        <button onclick="addToScreen(event)" class="number-btn">4</button>
+        <button onclick="addToScreen(event)" class="number-btn">5</button>
+        <button onclick="addToScreen(event)" class="number-btn">6</button>
+        <button onclick="addToScreen(event)" class="number-btn">1</button>
+        <button onclick="addToScreen(event)" class="number-btn">2</button>
+        <button onclick="addToScreen(event)" class="number-btn">3</button>
+        <button onclick="addToScreen(event)" class="number-btn">0</button>
+        <button onclick="addToScreen(event)" id="dot-btn">.</button>
+        <button onclick="equalFunc()" id="equal-btn">=</button>
+      </div>
+      <div class="operators-buttons">
+        <button onclick="divideNumbers()" id="divide">%</button>
+        <button onclick="multiplyNumbers()" id="multiply">x</button>
+        <button onclick="reduceNumbers()" id="reduce">-</button>
+        <button onclick="addNumbers()" id="add">+</button>
+      </div>
+    </div>
+    <script src="scripts.js"></script>
+  </body>
+</html>
