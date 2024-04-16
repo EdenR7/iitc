@@ -1,0 +1,120 @@
+@import url(reset.css);
+:root {
+  --clr-primary-100: hsl(30, 80%, 98%);
+  --clr-primary-300: hsl(34, 45%, 85%);
+  --clr-base-200: hsl(216, 69%, 20%);
+  --clr-base-300: hsl(32, 43%, 75%);
+}
+html,
+body {
+  width: 100%;
+}
+body {
+  padding: 4rem;
+  justify-content: center;
+  background-color: var(--clr-primary-300);
+}
+h1 {
+  color: var(--clr-base-200);
+}
+label {
+  font-weight: 600;
+  color: var(--clr-base-200);
+}
+input,
+select {
+  border: 0;
+  background-color: var(--clr-primary-100);
+}
+button {
+  padding-block: 2px;
+  background-color: #b5c18e;
+  color: var(--clr-base-200);
+  cursor: pointer;
+  border: 0;
+  border-radius: 2px;
+}
+button:hover {
+  background-color: var(--clr-base-200);
+  color: beige;
+}
+select {
+  margin-left: 1rem;
+}
+
+.flex-group {
+  display: flex;
+  flex-wrap: wrap;
+}
+.grid-group {
+  display: grid;
+}
+#start-page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.input-fields {
+  padding-block: 1rem;
+}
+#start-game {
+  padding-block: 2px;
+  background-color: var(--clr-base-200);
+  color: beige;
+}
+#start-game:hover {
+  padding-block: 2px;
+  background-color: #b5c18e;
+  color: var(--clr-base-200);
+}
+
+#game-container {
+  color: beige;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+}
+
+.guess-card {
+  position: relative;
+  align-self: self-start;
+  width: 100%;
+  border-radius: 1rem;
+  border: 1px solid var(--clr-base-200);
+  background-color: var(--clr-primary-100);
+  padding-inline: 1rem;
+  padding-block: 4px;
+  margin-bottom: 4px;
+}
+.number-div {
+  border: 1px solid hsl(39, 77%, 83%);
+  background-color: var(--clr-base-200);
+  padding-inline: 4px;
+  margin-right: 4px;
+}
+.number-btn {
+  border: 1px solid var(--clr-base-200);
+  background-color: var(--clr-base-300);
+  padding-inline: 4px;
+  margin-right: 4px;
+}
+.bulls {
+  color: var(--clr-base-200);
+  margin-left: 2rem;
+  margin-right: 8px;
+  text-align: center;
+}
+.cows {
+  /* position: relative; */
+  right: 0;
+  color: #b5c18e;
+  text-align: center;
+}
+button.number-btn:hover {
+  background-color: var(--clr-primary-300);
+  border: 1px solid #85a0ad;
+}
+
+.digits-buttons {
+  margin-block: 8px;
+}

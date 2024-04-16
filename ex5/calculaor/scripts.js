@@ -30,6 +30,9 @@ function calculate(){
         case 3:
           return numbers[numbers.length-2] * numbers[numbers.length-1];
         case 4:
+            if(numbers[numbers.length-1] == 0){
+                return
+            }
           return numbers[numbers.length-2] / numbers[numbers.length-1];
         case 5:
           return numbers[numbers.length-1];

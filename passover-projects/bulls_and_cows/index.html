@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="flex-group">
+    <div class="main-container">
+      <div id="start-page-container">
+        <h1 class="greet">Bulls&Cows</h1>
+        <div class="input-fields flex-group">
+          <input
+            type="text"
+            name="name"
+            id="username"
+            placeholder="Enter Your Name"
+          />
+        </div>
+        <div class="input-fields flex-group">
+          <label for="options">Number of Slots:</label>
+          <select id="options">
+            <option value="4">4 slots</option>
+            <option value="5">5 slots</option>
+            <option value="6">6 slots</option>
+            <option value="7">7 slots</option>
+            <option value="8">8 slots</option>
+          </select>
+        </div>
+        <button id="start-game" onclick="startGame()">Start Game</button>
+      </div>
+      <div id="game-container" class="flex-group">
+        <div class="guesses-container">
+          <div class="guess-card flex-group" id="title-card"></div>
+        </div>
+        <div class="digits-buttons">
+          <button onclick="changeDigit(event)" type="button">0</button>
+          <button onclick="changeDigit(event)" type="button">1</button>
+          <button onclick="changeDigit(event)" type="button">2</button>
+          <button onclick="changeDigit(event)" type="button">3</button>
+          <button onclick="changeDigit(event)" type="button">4</button>
+          <button onclick="changeDigit(event)" type="button">5</button>
+          <button onclick="changeDigit(event)" type="button">6</button>
+          <button onclick="changeDigit(event)" type="button">7</button>
+          <button onclick="changeDigit(event)" type="button">8</button>
+          <button onclick="changeDigit(event)" type="button">9</button>
+        </div>
+        <button id="go-btn" onclick="checkTurn()" type="button">GO</button>
+      </div>
+    </div>
+    <script src="scripts.js"></script>
+  </body>
+</html>
