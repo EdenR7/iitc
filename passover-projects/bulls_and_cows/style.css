@@ -14,7 +14,11 @@ body {
   justify-content: center;
   background-color: var(--clr-primary-300);
 }
-h1 {
+h1,
+h2,
+p {
+  margin-bottom: 4px;
+  text-align: center;
   color: var(--clr-base-200);
 }
 label {
@@ -67,6 +71,20 @@ select {
   background-color: #b5c18e;
   color: var(--clr-base-200);
 }
+.game-statistics {
+  margin-block: 8px;
+}
+#stopwatch {
+  border-radius: 4px;
+  padding: 4px;
+  background-color: black;
+  color: var(--clr-primary-100);
+}
+#mistakes {
+  padding: 4px;
+  padding-left: 1rem;
+  color: var(--clr-primary-100);
+}
 
 #game-container {
   color: beige;
@@ -98,6 +116,16 @@ select {
   padding-inline: 4px;
   margin-right: 4px;
 }
+#first-bull {
+  color: var(--clr-base-200);
+  margin-left: 2rem;
+  margin-right: 8px;
+  text-align: center;
+}
+#first-cow {
+  color: #b5c18e;
+  text-align: right;
+}
 .bulls {
   color: var(--clr-base-200);
   margin-left: 2rem;
@@ -105,9 +133,12 @@ select {
   text-align: center;
 }
 .cows {
-  /* position: relative; */
-  right: 0;
   color: #b5c18e;
+  padding-left: 2rem;
+}
+.bulls {
+  color: var(--clr-base-200);
+  margin-left: 2.25rem;
   text-align: center;
 }
 button.number-btn:hover {
@@ -117,4 +148,26 @@ button.number-btn:hover {
 
 .digits-buttons {
   margin-block: 8px;
+}
+
+#overlay-message {
+  display: flex;
+  display: none;
+  left: 100;
+  z-index: 200;
+  background-color: var(--clr-primary-100);
+  color: var(--clr-base-200);
+  padding: 1rem;
+  position: fixed;
+  height: 50%;
+  width: 50%;
+  flex-direction: column;
+  align-content: center;
+}
+#play-again {
+  margin-right: 1rem;
+}
+#overlay-message div {
+  margin-left: 3rem;
+  margin-block: 4rem;
 }

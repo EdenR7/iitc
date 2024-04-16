@@ -7,6 +7,15 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body class="flex-group">
+    <div id="overlay-message" class="flex-group">
+      <p id="title-overlay"></p>
+      <p id="time-overlay"></p>
+      <p id="tries-overlay"></p>
+      <div class="flex-group">
+        <button onclick="playAgain()" id="play-again">Play Again</button>
+        <button onclick="closeOverlay()" id="quit">quit</button>
+      </div>
+    </div>
     <div class="main-container">
       <div id="start-page-container">
         <h1 class="greet">Bulls&Cows</h1>
@@ -31,6 +40,17 @@
         <button id="start-game" onclick="startGame()">Start Game</button>
       </div>
       <div id="game-container" class="flex-group">
+        <h2 class="greet-message"></h2>
+        <p class="introduction">
+          Discover the hidden code, in order to change the slot value first
+          <br />
+          click on it and then click on the buttons below, hurry the time is
+          running!
+        </p>
+        <div class="game-statistics flex-group">
+          <div id="stopwatch">00:00:00</div>
+          <div id="mistakes"></div>
+        </div>
         <div class="guesses-container">
           <div class="guess-card flex-group" id="title-card"></div>
         </div>
