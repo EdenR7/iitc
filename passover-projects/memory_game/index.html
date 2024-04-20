@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="endGameMessage" class="flex-group">
+      <div class="messageText">
+        <h2>Lorem ipsum dolor sit amet consectetur.</h2>
+      </div>
+      <div class="gameStats">
+        <p id="gameStats-time">Total time: <span id="total-time"></span></p>
+        <p id="gameStats-moves">
+          Total moves: <span id="total-moves"></span> Total mistakes:
+          <span id="total-mistakes"></span>
+        </p>
+      </div>
+      <div class="newGame">
+        <p>Lorem ipsum dolor.</p>
+        <div class="newGameButtons flex-group">
+          <button type="button" value="1" onclick="newGame(this.value)">
+            easy - 4X4
+          </button>
+          <button type="button" value="2" onclick="newGame(this.value)">
+            Medium - 5X4
+          </button>
+          <button type="button" value="3" onclick="newGame(this.value)">
+            Hard - 6X5
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="greet flex-group">
+      <h1>Welcome To Memory Game</h1>
+      <p>Practice your memory skills and beat your own records!</p>
+      <form>
+        <div class="input-fields flex-group">
+          <input
+            type="text"
+            name="name"
+            id="username"
+            placeholder="Enter Your Name Here"
+          />
+        </div>
+        <div class="input-fields flex-group">
+          <label for="options">Difficulty level: </label>
+          <select id="options">
+            <option value="1">easy - 4X4</option>
+            <option value="2">Medium - 5X4</option>
+            <option value="3">Hard - 6X5</option>
+          </select>
+        </div>
+      </form>
+      <button id="start-game" onclick="startGame()">Start Game</button>
+    </div>
+    <div class="game flex-group">
+      <div class="game-wrapper flex-group">
+        <div id="game-statistics" class="flex-group">
+          <div id="mistakes" class="statistic">Mistakes: 0</div>
+          <div id="Moves" class="statistic">Moves: 0</div>
+          <div id="stopwatch" class="statistic">00:00:00</div>
+        </div>
+        <div id="board" class="grid-group"></div>
+      </div>
+    </div>
+    <script src="scripts.js"></script>
+  </body>
+</html>

@@ -20,8 +20,8 @@ let isTimerRun = false;
 function startGame(){
     username = document.querySelector("#username").value;
     if(username == ""|| username == "Insert your name first!"){
-        document.querySelector("#username").value= "Insert your name first!";
-        document.querySelector("#username").style.color= "#DD5746";
+        document.querySelector("#username").placeholder = "❌ You must enter your name first!";
+        document.querySelector("#username").style.border = '2px solid red';
     }else{
         document.getElementById("start-page-container").style.display = "none";
         document.getElementById("game-container").style.display = "flex";
