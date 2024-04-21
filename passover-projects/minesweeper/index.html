@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="main-container">
+      <div id="greet" class="flex-group">
+        <h1 class="first-game">Welcome to mainsweepers game!</h1>
+        <input
+          class="first-game"
+          id="username"
+          type="text"
+          placeholder="Insert your name here"
+        />
+        <div id="game-buttons">
+          <button value="7" type="button" onclick="startGame(this.value)">
+            Easy - 7X7
+          </button>
+          <button value="14" type="button" onclick="startGame(this.value)">
+            Hard - 14X14
+          </button>
+          <button value="21" type="button" onclick="startGame(this.value)">
+            Extreme - 21X21
+          </button>
+        </div>
+      </div>
+      <div id="game-main" class="flex-group">
+        <div id="statistics" class="flex-group">
+          <div id="left-cells">Left :</div>
+          <button type="button" id="restart">😄</button>
+          <div id="timer">00:00:00</div>
+        </div>
+        <div id="board" class="grid-group">
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+          <div class="initial-card"></div>
+        </div>
+      </div>
+    </div>
+    <script src="scripts.js"></script>
+  </body>
+</html>
