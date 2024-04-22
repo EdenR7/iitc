@@ -1,5 +1,6 @@
 let username;
-const board = [];
+let gameStarted = false;
+let board = [];
 let domBoard;
 const offsets = [ // Make the search for the adjacent cells more efficient and orgnized
     [-1, -1], [-1, 0], [-1, 1], 
@@ -7,6 +8,16 @@ const offsets = [ // Make the search for the adjacent cells more efficient and o
     [1, -1], [1, 0], [1, 1] 
 ];
 let leftNonMinesCell;
+let clock = {
+    seconds : 0,
+    minutes : 0,
+    hours : 0, 
+    displayTimer : function(){
+        return(`${this.hours.toString().length == 1 ? `0${this.hours}`:this.hours}:${this.minutes.toString().length == 1 ? `0${this.minutes}`:this.minutes}:${this.seconds.toString().length == 1 ? `0${this.seconds}`:this.seconds}`);
+    }
+};
+let timeInterval;
+let isTimerRun = false;
 
 function nameInserted(){
     let inputElement = document.querySelector("#username");
@@ -21,11 +32,31 @@ function nameInserted(){
     }
 }
 
+function startStopTimer(){ // run the timer if its currently close else it will stop the timer
+    if(! isTimerRun){
+        timeInterval = window.setInterval(function(){
+            clock.seconds ++;
+            if(clock.seconds == 60){
+                clock.seconds = 0;
+                clock.minutes ++;
+            }
+            if(clock.minutes == 60){
+                clock.minutes = 0;
+                clock.hours ++;
+            }
+            document.querySelector("#timer").innerText = clock.displayTimer();
+        }, 1000);
+        isTimerRun = true;
+    } else{
+        window.clearInterval(timeInterval);
+        isTimerRun = false;
+    }
+}
 function generateInitialBoard(size){
     for (let row = 0; row < size; row++) {
         let newRow = [];
         for (let i = 0; i < size; i++) {
-            newRow.push({cellElement:undefined, cellID: undefined, row:row, col:i, value:"", isOpen: false});
+            newRow.push({cellID: undefined, row:row, col:i, value:"", isOpen: false});
         }
         board.push(newRow);
     }
@@ -40,7 +71,6 @@ function insertMines(amountOfMines) {
         }
     }
 }
-
 function isMinedCell(cell){ 
     if (cell.value ==="💣"){
         return true;       
@@ -93,7 +123,10 @@ function generateGameBoard(size, amountOfMines){
 function startGame(size){
     if (nameInserted()) {
         generateGameBoard(size, (size*2));
-        leftNonMinesCell = size*2;
+        startStopTimer();
+        leftNonMinesCell = (size**2)-(size*2);
+        document.getElementById("left-cells").innerText = leftNonMinesCell;
+        gameStarted = true;
     }
 }
 
@@ -105,9 +138,28 @@ function shouldOpenCell(cell){
     return false;
 }
 function gameOver(){
+    document.getElementById("left-cells").innerText = leftNonMinesCell;
+    if (leftNonMinesCell == 0) { // if its a case of win
+        window.setTimeout(function(){
+            const endMessage = `<div id="end-message" class="flex-group">
+            <p class="end-text">
+              Well Done <span id="name">${username}</span> you did it !
+            </p>
+            <p class="end-text">It took <span id="total-time">${clock.displayTimer()}</span></p>
+            <p>To start new game please press the 😄 button</p>
+          </div>`;
+          domBoard.innerHTML += endMessage;
+          startStopTimer();
+        }, 1000)
+    }else{
+        domBoard.childNodes.forEach((element) => { // Remove the option to continue the game
+            element.removeAttribute('onclick');
+        });
+        startStopTimer();
+        document.querySelector("#restart").innerText = '😭';
+    }
 }
-function elementHandling(cell){
-    console.log(cell);
+function elementHandling(cell){ // replace the class of the cell from card to opened-card
     const element = document.getElementById(cell.cellID);
     element.classList.remove("card");
     element.classList.add('opened-card');
@@ -115,17 +167,18 @@ function elementHandling(cell){
         element.innerText = cell.value;
     }
 }
-function openCells(cellID){
-    const parts = cellID.split('X');
-    const cell = board[parts[0]][parts[1]], element = document.getElementById(cell.cellID);
-    elementHandling(cell)
+function openCells(cellID){ // by clicking a cell check the cell value and start recursion/end the game 
+    const parts = cellID.split('X'); // match the ID of the cell to the behind the scene board cells elements
+    const cell = board[parts[0]][parts[1]]; 
+    elementHandling(cell);
     cell.isOpen = true;
-    if(isMinedCell(cell)){
-        elementHandling(cell);// Game over
+    leftNonMinesCell --;
+    if(isMinedCell(cell) || leftNonMinesCell == 0){// Game over
         gameOver();
         return;
     }
-    if(cell.value > 0){
+    document.getElementById("left-cells").innerText = leftNonMinesCell;
+    if(cell.value > 0){ // if its a cell with a value stop the recursion 
         return;
     }
     for(let offset = 0; offset<offsets.length; offset++){ // for loop that iterates over all the adjacent possibilities cells
@@ -136,9 +189,26 @@ function openCells(cellID){
         }
     }
 }
-// Add the restart button 😭
-// Add the timer and the leftNonMines tracker
-// improve the design
+
+function resetClock(){
+    if(isTimerRun){
+        window.clearInterval(timeInterval);
+        isTimerRun = false;
+    }
+    clock.hours = 0, clock.minutes = 0, clock.seconds = 0;
+    document.querySelector("#timer").innerText = clock.displayTimer();
+}
+function restart(){
+    if(gameStarted){
+        const size = board.length;
+        board = [];
+        resetClock();
+        window.setTimeout(function(){
+            document.querySelector("#restart").innerText = '😄';
+            startGame(size);
+        }, 1000)
+    }
+}
 
 
 

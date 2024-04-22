@@ -17,8 +17,8 @@
           placeholder="Insert your name here"
         />
         <div id="game-buttons">
-          <button value="7" type="button" onclick="startGame(this.value)">
-            Easy - 7X7
+          <button value="9" type="button" onclick="startGame(this.value)">
+            Easy - 9X9
           </button>
           <button value="14" type="button" onclick="startGame(this.value)">
             Hard - 14X14
@@ -30,8 +30,10 @@
       </div>
       <div id="game-main" class="flex-group">
         <div id="statistics" class="flex-group">
-          <div id="left-cells">Left :</div>
-          <button type="button" id="restart">😄</button>
+          <div id="left-cells-wrapper">
+            Left cells to open: <span id="left-cells"></span>
+          </div>
+          <button type="button" id="restart" onclick="restart()">😄</button>
           <div id="timer">00:00:00</div>
         </div>
         <div id="board" class="grid-group">
@@ -233,6 +235,11 @@
           <div class="initial-card"></div>
         </div>
       </div>
+      <footer class="flex-group">
+        <p>
+          <i>made by <a href="https://github.com/EdenR7">Eden Roth</a></i>
+        </p>
+      </footer>
     </div>
     <script src="scripts.js"></script>
   </body>

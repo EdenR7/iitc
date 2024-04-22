@@ -57,6 +57,7 @@ body {
   padding-block: 4px;
 }
 #board {
+  position: relative;
   padding: 8px;
   background-color: var(--clr-base-300);
   border: 2px solid var(--clr-base-500);
@@ -65,6 +66,25 @@ body {
   grid-template-rows: repeat(14, 1fr);
   max-width: 500px;
   width: 100%;
+}
+#end-message {
+  text-align: center;
+  padding-inline: 1rem;
+  padding-top: 4rem;
+  font-size: 2rem;
+  position: absolute;
+  z-index: 1000;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  background-color: azure;
+}
+#name {
+  font-weight: 700;
 }
 .initial-card {
   background-color: var(--clr-base-300);
@@ -83,9 +103,25 @@ body {
   background-color: hsl(0, 0%, 74%);
   font-weight: 700;
   font-size: 20px;
-  border: 2px solid var(--clr-base-500);
+  border: 1px solid var(--clr-base-500);
   border-radius: 4px;
   aspect-ratio: 1 / 1;
   text-align: center;
   color: hsla(120, 100%, 25%, 0.629);
+}
+
+#restart {
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+}
+footer {
+  font-size: 12px;
+  padding-block: 1rem;
+  width: 100%;
+  justify-content: center;
+}
+a {
+  font-weight: 700;
+  text-decoration: none;
 }
