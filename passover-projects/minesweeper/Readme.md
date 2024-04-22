@@ -15,5 +15,5 @@ flow
 - every time the user select cell it checks its value:
  1. 0 value: open all the adjcent cells of the area
  2. 1-8 value: open only that cell
- 3. game over 
-  
+ 3. bomb: game over 
+* user can restart the game any time by click the emoji icon
