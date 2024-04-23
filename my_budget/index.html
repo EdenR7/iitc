@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="general-details" class="flex-group">
+      <h2>Available Budget in <span id="date"></span>:</h2>
+      <h1 id="total-budget">0.00</h1>
+      <div id="income-wrapper" class="card flex-group">
+        <p class="title">INCOME</p>
+        <p id="current-incomes">+ 0.00</p>
+      </div>
+      <div id="expenses-wrapper" class="card flex-group">
+        <p class="title">EXPENSES</p>
+        <p id="current-expenses">- 0.00 <span id="precentage">-%</span></p>
+      </div>
+    </div>
+    <div id="new-input" class="flex-group">
+      <form class="flex-group">
+        <select id="symbol-type" class="income-field">
+          <option value="+">+</option>
+          <option value="-">-</option>
+        </select>
+        <input
+          type="text"
+          id="add-description"
+          class="income-field"
+          placeholder="Add description"
+        />
+        <input
+          type="number"
+          id="value"
+          class="income-field"
+          placeholder="Value"
+        />
+        <button id="add-input" type="button" onclick="submitInput()">
+          <div class="img-container">
+            <img src="img/check-mark-symbol-tick.jpg" alt="" />
+          </div>
+        </button>
+      </form>
+    </div>
+    <div id="income-expenses" class="flex-group">
+      <div id="data" class="grid-group">
+        <div id="income">
+          <h2>INCOME</h2>
+        </div>
+        <div id="expenses">
+          <h2>EXPENSES</h2>
+        </div>
+      </div>
+    </div>
+    <script src="scripts.js"></script>
+  </body>
+</html>
