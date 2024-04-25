@@ -20,6 +20,10 @@ body {
 h2 {
   font-size: 20px;
 }
+h3 {
+  font-size: 14px;
+  font-weight: 300;
+}
 button {
   border: 0;
 }
@@ -51,7 +55,7 @@ button {
 
 #income-wrapper {
   margin-bottom: 8px;
-  padding-right: 2.5rem;
+  padding-right: 2.85rem;
   background-color: var(--clr-primary-500);
 }
 #expenses-wrapper {
@@ -68,11 +72,13 @@ button {
 .title {
   color: var(--clr-base-900);
 }
-#precentage {
-  padding-inline: 4px;
-  padding-block: 2px;
+#total-precentage {
+  align-self: center;
+  text-align: center;
+  padding-inline: 2px;
   font-size: 10px;
-  margin-left: 2px;
+  width: 29px;
+  margin-left: 8px;
   background-color: hsl(359, 93%, 71%);
 }
 
@@ -124,4 +130,62 @@ select {
   border-radius: 50%;
   width: 30px;
   height: 30px;
+}
+
+#income-expenses {
+  margin-top: 3rem;
+  justify-content: center;
+}
+#data {
+  min-width: 750px;
+  gap: 2rem;
+  grid-template-columns: 1fr 1fr;
+}
+#data h3 {
+  padding-block: 8px;
+  border-bottom: 1px solid var(--clr-base-300);
+}
+#income h3 {
+  color: var(--clr-primary-500);
+}
+#expenses h3 {
+  color: var(--clr-primary-400);
+}
+.data-card {
+  color: var(--clr-base-600);
+  padding-block: 8px;
+  border-bottom: 1px solid var(--clr-base-300);
+  padding-inline: 12px;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+}
+/* .data-card-odd {
+  color: var(--clr-base-600);
+  background-color: var(--clr-base-200);
+  padding-block: 8px;
+  border-bottom: 1px solid var(--clr-base-300);
+  padding-inline: 12px;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+} */
+.description-text {
+  word-break: break-all;
+  max-width: 200px;
+}
+#income .value-text {
+  color: var(--clr-primary-500);
+}
+.new-expense-amount {
+  color: var(--clr-primary-400);
+}
+.new-expense-precentage {
+  align-self: center;
+  margin-left: 12px;
+  color: var(--clr-primary-400);
+  text-align: center;
+  font-size: 10px;
+  width: 25px;
+  background-color: hsl(359, 93%, 92%);
 }
