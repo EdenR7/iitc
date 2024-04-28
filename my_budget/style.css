@@ -36,6 +36,7 @@ button {
   display: grid;
 }
 
+/* Desings of all the elements of the title section */
 #general-details {
   color: var(--clr-base-0);
   padding-block: 1rem;
@@ -82,6 +83,7 @@ button {
   background-color: hsl(359, 93%, 71%);
 }
 
+/* Designs of all the elements of the form */
 #new-input {
   padding-block: 1rem;
   background-color: var(--clr-base-200);
@@ -115,7 +117,6 @@ select {
 .expense-field:focus {
   border: 1px solid var(--clr-primary-400);
 }
-
 #value {
   max-width: 4.5rem;
 }
@@ -126,17 +127,18 @@ select {
 }
 .img-container {
   overflow: hidden;
-  border: 1px solid var(--clr-primary-500);
   border-radius: 50%;
   width: 30px;
   height: 30px;
 }
 
+/* Designs of all the elements after the form */
 #income-expenses {
   margin-top: 3rem;
   justify-content: center;
 }
 #data {
+  padding-bottom: 3rem;
   min-width: 750px;
   gap: 2rem;
   grid-template-columns: 1fr 1fr;
@@ -151,6 +153,8 @@ select {
 #expenses h3 {
   color: var(--clr-primary-400);
 }
+
+/* Design of each data card */
 .data-card {
   color: var(--clr-base-600);
   padding-block: 8px;
@@ -160,16 +164,6 @@ select {
   align-items: center;
   font-size: 14px;
 }
-/* .data-card-odd {
-  color: var(--clr-base-600);
-  background-color: var(--clr-base-200);
-  padding-block: 8px;
-  border-bottom: 1px solid var(--clr-base-300);
-  padding-inline: 12px;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 14px;
-} */
 .description-text {
   word-break: break-all;
   max-width: 200px;
@@ -189,3 +183,35 @@ select {
   width: 25px;
   background-color: hsl(359, 93%, 92%);
 }
+#cancel-btn {
+  align-self: flex-end;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 12px;
+  border-radius: 50%;
+  background-image: url(img/remove_icon.jpeg);
+  width: 20px;
+  height: 20px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+@media (max-width: 760px) {
+  #data {
+    min-width: 420px;
+    gap: 2rem;
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 450px) {
+  #data {
+    min-width: 300px;
+    gap: 2rem;
+    grid-template-columns: 1fr;
+  }
+  .description-text {
+    word-break: break-all;
+    max-width: 150px;
+  }
+}
+
