@@ -1,4 +1,5 @@
-let totalBudget = { // Main data structure
+// initializations :
+const totalBudget = { // Main data structure
     incomes: {
         total:0,
         descriptions:[]
@@ -11,14 +12,38 @@ let totalBudget = { // Main data structure
         return Number(this.incomes.total - this.expenses.total);
     }
 };
-
+// initialize the date
 const date = getDate();
 document.getElementById("date").innerText = date;
 function getDate(){
     const curDate = new Date();
     return `${curDate.toLocaleString('en-US', { month: 'long' })} ${curDate.getFullYear()}`;
 }
+// initialize the totalBudget, if there is history in the local storage it will start from there(akso the web page) 
+initializeTotalBudget();
+function initializeTotalBudget() {
+    if ('budget' in localStorage) {
+        let existBudget = JSON.parse(localStorage.getItem("budget"));
+        // incomes :
+        totalBudget.incomes.total = existBudget.incomes.total;
+        totalBudget.incomes.descriptions = existBudget.incomes.descriptions;
+
+        totalBudget.incomes.descriptions.forEach((incomeElement) => { // display the income cards
+            addNewActionToScreen("income", incomeElement.description, incomeElement.amount);
+        });
+        // expenses : 
+        totalBudget.expenses.total = existBudget.expenses.total;
+        totalBudget.expenses.descriptions = existBudget.expenses.descriptions;
+        totalBudget.expenses.descriptions.forEach((expenseElement) => { // display the expense cards
+            addNewActionToScreen("expense", expenseElement.description, expenseElement.amount);
+        });
+        dispalyTotalBudgetUpdate(); // update the title section
+        precentageUpdate(); // update all the precentage of every history expense
+        matchIdToIndex(); // make sure that the id's correct and add some features
+    }
+}
 document.getElementById("add-description").focus();
+
 
 //validations
 function validateDescription(){
@@ -45,6 +70,10 @@ function validateValueInput(){
 }
 
 // adding new elements functions
+function updateLocalStorage() {//update the local storage
+    let totalBudgetString = JSON.stringify(totalBudget);
+    localStorage.setItem('budget', totalBudgetString);
+}
 function addMouseEvents(elementID, isIncome) {
     let toAddFlag, toRemoveFlag;
     // in case of expenses the value wrapper conatin also the precentage so it has one more child
@@ -110,7 +139,7 @@ function precentageUpdate(){ // update the precentage of the expenses of the tot
         totalBudgetElemnent.innerText = "-%";
     }
     // the precentages all the expenses elements
-    const expensesPrecentageElements = document.querySelectorAll(".new-expense-precentage")
+    const expensesPrecentageElements = document.querySelectorAll(".new-expense-precentage");
     totalBudget.expenses.descriptions.forEach((element, index) => {
         if (displayPrecentage) {
             expensesPrecentageElements[index].innerText = `${Math.floor(Math.abs(element.amount*100) / totalBudget.incomes.total)}%`;
@@ -154,20 +183,23 @@ function submitInput(){ // new action by the user
         dispalyTotalBudgetUpdate();
         precentageUpdate(); // Always updating the existing precentage of the expenses
         matchIdToIndex();
+        updateLocalStorage();
         document.getElementById("add-description").value = "";
         document.getElementById("value").value = "";
         document.getElementById("add-description").focus();
+        
     }
 }
+
 // adding the options to press enter to activate the button
 document.getElementById("value").addEventListener("keydown", function(event){ // adding the option to submit by presseing enter
     if (event.key === 'Enter') {
         submitInput();
     }
 });
-document.getElementById("add-description").addEventListener("keydown", function(event){ // adding the option to submit by presseing enter
+document.getElementById("add-description").addEventListener("keydown", function(event){ // by pressing enter it will move you to the value field
     if (event.key === 'Enter') {
-        submitInput();
+        document.getElementById("value").focus();
     }
 });
 
@@ -184,6 +216,7 @@ function removeElementFromObject(ancestorID, elementIndex) {
         totalBudget.expenses.descriptions.splice(elementIndex, 1);
         totalBudget.expenses.total -= elementValue;
     }
+    updateLocalStorage();
 }
 function removeElement(event){
     // get access to the desired ancestors
