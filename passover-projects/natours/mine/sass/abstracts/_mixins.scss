@@ -1,0 +1,10 @@
+@mixin animations($animationName){
+    animation-name: $animationName;
+    animation-duration: 1s;
+    animation-timing-function: ease-out;
+}
+@mixin positionABS($top, $left){
+    position: absolute;
+    top: $top;
+    left: $left;
+}

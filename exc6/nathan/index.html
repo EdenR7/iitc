@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bulls & Cows</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body style="text-align: center; background-color: #0f1722; color: white">
+    <div>
+      <h1 style="color: #add1ff">Bulls and Cows</h1>
+      <p>Discover the hidden code!</p>
+      <p>Click, or use arrow keys, to change your guess in each box</p>
+      <p>
+        (Bulls and Cows is similar to, but came before, the board game
+        MastermindTM*)
+      </p>
+      <p>Bulls = correct code, correct position</p>
+      <p>Cows = correct code, wrong position</p>
+    </div>
+    <div style="width: 360px; margin: auto">
+      <div id="pcNumber" class="number" style="margin-bottom: 5px">
+        <div style="flex: 1">
+          <span id="pc_digit_index_0" class="digit_in_number"></span
+          ><span id="pc_digit_index_1" class="digit_in_number"></span
+          ><span id="pc_digit_index_2" class="digit_in_number"></span
+          ><span id="pc_digit_index_3" class="digit_in_number"></span>
+        </div>
+        <div style="flex: 1">
+          <span class="bulls bulls_cows">Bulls</span
+          ><span class="cows bulls_cows">Cows</span>
+        </div>
+      </div>
+      <div id="guessResult"></div>
+      <div id="userNumbers" class="number">
+        <div style="flex: 1">
+          <span
+            onclick="userDigitClickHandler(0)"
+            id="user_digit_index_0"
+            class="digit_in_number"
+            style="cursor: pointer"
+            >0</span
+          ><span
+            onclick="userDigitClickHandler(1)"
+            id="user_digit_index_1"
+            class="digit_in_number"
+            style="cursor: pointer"
+            >1</span
+          ><span
+            onclick="userDigitClickHandler(2)"
+            id="user_digit_index_2"
+            class="digit_in_number"
+            style="cursor: pointer"
+            >2</span
+          ><span
+            onclick="userDigitClickHandler(3)"
+            id="user_digit_index_3"
+            class="digit_in_number"
+            style="cursor: pointer"
+            >3</span
+          >
+        </div>
+        <div
+          style="
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          "
+        >
+          <button onclick="goClickHandler()">Go</button>
+          <p id="duplicateError"></p>
+        </div>
+      </div>
+      <div style="display: flex; margin: 20px">
+        <span onclick="keyboardDigitClickHandler(0)" class="keyboard_digit"
+          >0</span
+        >
+        <span onclick="keyboardDigitClickHandler(1)" class="keyboard_digit"
+          >1</span
+        >
+        <span onclick="keyboardDigitClickHandler(2)" class="keyboard_digit"
+          >2</span
+        >
+        <span onclick="keyboardDigitClickHandler(3)" class="keyboard_digit"
+          >3</span
+        >
+        <span onclick="keyboardDigitClickHandler(4)" class="keyboard_digit"
+          >4</span
+        >
+        <span onclick="keyboardDigitClickHandler(5)" class="keyboard_digit"
+          >5</span
+        >
+        <span onclick="keyboardDigitClickHandler(6)" class="keyboard_digit"
+          >6</span
+        >
+        <span onclick="keyboardDigitClickHandler(7)" class="keyboard_digit"
+          >7</span
+        >
+        <span onclick="keyboardDigitClickHandler(8)" class="keyboard_digit"
+          >8</span
+        >
+        <span onclick="keyboardDigitClickHandler(9)" class="keyboard_digit"
+          >9</span
+        >
+      </div>
+    </div>
+    <div id="buttons">
+      <button onclick="startNewGame()">New Game</button
+      ><button
+        onclick="putPcDigitsOnTheDom();
+      "
+      >
+        Give up</button
+      ><button onclick="showHistory()">History</button>
+    </div>
+    <script src="index.js"></script>
+  </body>
+</html>

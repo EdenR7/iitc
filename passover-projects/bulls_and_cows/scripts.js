@@ -32,6 +32,7 @@ function startGame(){
         document.querySelector(".greet-message").innerText = `Hello ${username} welcome to Bulls&Cows !`;
         document.querySelector("#mistakes").innerText = tries;
         startStopTimer();
+        console.log(targetBoard);
     }
 }
 function generateRandomBoard(size){

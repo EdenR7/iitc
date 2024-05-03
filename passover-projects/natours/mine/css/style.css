@@ -1,0 +1,479 @@
+@import "reset.css";
+@import "utils.css";
+@keyframes moveFromLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  95% {
+    opacity: 0.5;
+    transform: translateX(15px);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
+}
+@keyframes moveFromRight {
+  0% {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  95% {
+    opacity: 0.5;
+    transform: translateX(-15px);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
+}
+@keyframes moveFromBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/*
+  1. Use a more-intuitive box-sizing model.
+*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/*
+    2. Remove default margin
+  */
+* {
+  margin: 0;
+}
+
+/*
+    Typographic tweaks!
+    3. Add accessible line-height
+    4. Improve text rendering
+  */
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/*
+    5. Improve media defaults
+  */
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/*
+    6. Remove built-in form typography styles
+  */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/*
+    7. Avoid text overflows
+  */
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+/*
+    8. Create a root stacking context
+  */
+#root,
+#__next {
+  isolation: isolate;
+}
+
+html,
+body,
+#main-container {
+  height: 100vh;
+  width: 100%;
+}
+
+body {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  padding: 2rem;
+}
+
+#main-container,
+main {
+  background-color: hsl(0, 0%, 97%);
+}
+
+.flex-group {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.btn {
+  cursor: pointer;
+  padding-block: 1rem;
+  padding-inline: 2.5rem;
+  border-radius: 2rem;
+  /* display: inline-block + parent - text-align: center; Will center also the buttons */
+}
+
+.a-btn {
+  padding: 4px;
+  position: relative;
+  text-decoration: none;
+  color: rgb(40, 180, 133);
+  transition: all 0.25s;
+}
+.a-btn::after {
+  content: "";
+  display: block;
+  position: absolute;
+  margin-top: 2px;
+  background-color: rgb(40, 180, 133);
+  width: 100%;
+  height: 1px;
+}
+.a-btn:hover {
+  background-color: rgb(85, 197, 122);
+  color: hsl(0, 0%, 100%);
+  transform: translateY(-8px);
+  box-shadow: 0px 0px 4px 2px rgba(54, 54, 54, 0.15);
+}
+.a-btn:hover::after {
+  display: none;
+}
+
+.skewed-title {
+  font-size: 2rem;
+  text-align: center;
+  background: linear-gradient(to right, rgb(126, 213, 111), rgb(40, 180, 133));
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 5rem;
+  transition: transform 0.2s ease;
+  transform: skewX(0deg) skewY(0deg);
+}
+.skewed-title:hover {
+  transform: skewX(15deg) skewY(2deg) scale(1.1);
+  text-shadow: 0px 4px 4px rgba(54, 54, 54, 0.15);
+}
+
+.row {
+  max-width: 71rem;
+  background-color: hsl(0, 0%, 53%);
+  margin: 0 auto;
+}
+.row:not(:last-child) {
+  margin-bottom: 5rem;
+}
+
+.header {
+  height: 95vh;
+  /*There are two bgimg:
+      The linear gradient which mix the colors, it tells to go on the colo scale from
+      right to the second color. The opcaity makes the second img be visible*/
+  background-image: linear-gradient(to right, rgba(126, 213, 111, 0.8), rgba(40, 180, 133, 0.8)), url(../img/hero.jpg);
+  background-repeat: no-repeat;
+  background-position: top;
+  background-size: cover;
+  clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
+  position: relative;
+  background-color: hsl(0, 0%, 97%);
+  /*
+  Another way to center the element  
+  .header-content {
+    color: var(--clr-base-0);
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%); // the translate refers to the object iteslf
+                                         thats why it will position the text exactly in the middle
+  } */
+}
+.header__white-icon {
+  position: absolute;
+  top: 2.5rem;
+  left: 2.5rem;
+  width: 75px;
+}
+.header__content {
+  color: hsl(0, 0%, 100%);
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+}
+.header__content h1 {
+  font-weight: 400;
+  margin-top: 10.5rem;
+  font-size: 4rem;
+  letter-spacing: 3rem;
+  animation-name: moveFromLeft;
+  animation-duration: 1s;
+  animation-timing-function: ease-out;
+  /*
+  animation-iteration-count: 2; how many time execute the animation
+  animation-delay: 2s; delay before start the animation
+  animation-timing-function: ease-in; the speed that the animate will play (right now its start slow and than becomes faster);  
+  */
+}
+.header__content h2 {
+  font-weight: 400;
+  margin-top: 0.5rem;
+  font-size: 1.5rem;
+  letter-spacing: 0.75rem;
+  word-spacing: 0.75rem;
+  animation-name: moveFromRight;
+  animation-duration: 1s;
+  animation-timing-function: ease-out;
+}
+.header #discover-btn {
+  cursor: pointer;
+  position: relative;
+  margin-top: 4rem;
+  color: hsl(0, 0%, 53%);
+  text-decoration: none;
+  background-color: hsl(0, 0%, 100%);
+  box-shadow: 0px 0px 2px 1px rgba(54, 54, 54, 0.25);
+  animation: moveFromBottom 1s ease-out 0.75s;
+  animation-fill-mode: backwards; /*in case of delay the initial mode will be the 0%*/
+}
+.header #discover-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0px 0px 8px 4px rgba(54, 54, 54, 0.35);
+}
+.header #discover-btn:active {
+  transform: translateY(2px);
+  box-shadow: 0px 0px 8px 4px rgba(54, 54, 54, 0.25);
+}
+.header #discover-btn::after {
+  content: ""; /*there must be content to the after element*/
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1; /*make sure that the element is behind the parent element*/
+  width: 100%;
+  height: 100%;
+  transition: all 0.5s; /*The changes in the hover mode will took 0.5s*/
+  border-radius: 2rem;
+  color: var(--clr-base-500);
+  background-color: hsl(0, 0%, 100%);
+}
+.header #discover-btn:hover::after {
+  /*the after element in the hover mode*/
+  opacity: 0; /*at the end the element will be unvisisble*/
+  transform: scale(1.5); /*inflate the size of the element by 1.5*/
+}
+
+.about {
+  width: 100%;
+  padding-block: 10rem;
+  background-color: inherit;
+}
+.about__title--wrapper {
+  margin-bottom: 40px;
+}
+.about .about__main--wrapper {
+  color: hsl(0, 0%, 47%);
+  justify-content: center;
+  gap: 4rem;
+}
+.about .about__main--wrapper h3 {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+.about .about__main--wrapper .about__main--text-wrapper {
+  width: 540px;
+  gap: 2rem;
+}
+.about .about__main--wrapper .about-imgs--wrapper {
+  width: 540px;
+  position: relative;
+}
+.about .about__main--wrapper .about-imgs--wrapper .about-img {
+  position: absolute;
+  box-shadow: 0px 0px 8px 4px rgba(54, 54, 54, 0.15);
+  transition: all 0.25s;
+}
+.about .about__main--wrapper .about-imgs--wrapper .about-img:hover {
+  z-index: 100;
+  transform: scale(1.1) translateY(-10px);
+  outline: 1rem solid rgb(85, 197, 122);
+  outline-offset: 1rem;
+  border-radius: 12px;
+  box-shadow: 0px 0px 12px 4px rgba(54, 54, 54, 0.25);
+}
+.about .about__main--wrapper .about-imgs--wrapper .img1 {
+  top: -20px;
+}
+.about .about__main--wrapper .about-imgs--wrapper .img2 {
+  top: 20px;
+  right: 0;
+}
+.about .about__main--wrapper .about-imgs--wrapper .img3 {
+  top: 100px;
+  left: 100px;
+}
+
+.features {
+  align-items: center;
+  justify-content: center;
+  gap: 4rem;
+  width: 100%;
+  height: 95vh;
+  background-image: linear-gradient(to right, rgba(126, 213, 111, 0.8), rgba(40, 180, 133, 0.8)), url(../img/nat-4.jpg);
+  background-position: center;
+  background-size: cover;
+  clip-path: polygon(0% 20%, 100% 0, 100% 80%, 0 100%);
+}
+.features .feature-card {
+  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.75);
+  padding: 1.5rem;
+  max-width: 15rem;
+  color: hsl(0, 0%, 47%);
+  text-align: center;
+  box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.15);
+  transition: all 0.25s;
+}
+.features .feature-card:hover {
+  transform: translateY(-1rem) scale(1.05);
+}
+.features .feature-card i {
+  background: linear-gradient(to right, rgb(126, 213, 111), rgb(40, 180, 133));
+  background-clip: text;
+  color: transparent;
+  font-size: 4rem;
+  margin-bottom: 0.5rem;
+}
+.features .feature-card h3 {
+  font-size: 1rem;
+  margin-block: 1rem;
+}
+.tours {
+  width: 100%;
+  padding-top: 7rem;
+  padding-bottom: 10rem;
+}
+.tours .tours__cards {
+  gap: 4rem;
+  justify-content: center;
+}
+.tours .tour-card {
+  border-radius: 4px;
+  box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  position: relative;
+  height: 32rem;
+  width: 20rem;
+}
+.tours .tour-card .card__side-1 {
+  background-image: linear-gradient(to right bottom, rgb(255, 185, 0), rgb(255, 119, 48));
+}
+.tours .tour-card .card__side-2 {
+  background-image: linear-gradient(to right bottom, rgb(126, 213, 111), rgb(40, 180, 133));
+}
+.tours .tour-card .card__side-3 {
+  background-image: linear-gradient(to right bottom, rgb(41, 152, 255), rgb(86, 67, 250));
+}
+.tours .tour-card .card__side {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  transition: all 0.8s ease;
+  backface-visibility: hidden;
+}
+.tours .tour-card .card__side--front .card__header-1 {
+  background-image: linear-gradient(to right bottom, rgb(255, 185, 0), rgb(255, 119, 48)), url(../img/nat-5.jpg);
+}
+.tours .tour-card .card__side--front .card__header-1 span {
+  background-image: linear-gradient(to right bottom, rgb(255, 185, 0), rgb(255, 119, 48));
+}
+.tours .tour-card .card__side--front .card__header-2 {
+  background-image: linear-gradient(to right bottom, rgb(126, 213, 111), rgb(40, 180, 133)), url(../img/nat-6.jpg);
+}
+.tours .tour-card .card__side--front .card__header-2 span {
+  background-image: linear-gradient(to right bottom, rgb(126, 213, 111), rgb(40, 180, 133));
+}
+.tours .tour-card .card__side--front .card__header-3 {
+  background-image: linear-gradient(to right bottom, rgb(41, 152, 255), rgb(86, 67, 250)), url(../img/nat-7.jpg);
+}
+.tours .tour-card .card__side--front .card__header-3 span {
+  background-image: linear-gradient(to right bottom, rgb(41, 152, 255), rgb(86, 67, 250));
+}
+.tours .tour-card .card__side--front .top-part {
+  position: relative;
+  height: 40%;
+  background-position: center, center;
+  background-size: cover, cover;
+  background-blend-mode: screen;
+  clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+  text-align: right;
+}
+.tours .tour-card .card__side--front .top-part h3 {
+  position: absolute;
+  color: hsl(0, 0%, 100%);
+  bottom: 1.5rem;
+  right: 1rem;
+  font-weight: 300;
+  font-size: 28px;
+  width: 70%;
+}
+.tours .tour-card .card__side--front .top-part h3 .card__header--span {
+  padding: 8px;
+}
+.tours .tour-card .card__side--front .main-part {
+  color: hsl(0, 0%, 47%);
+  width: 100%;
+  padding: 30px;
+  height: 60%;
+}
+.tours .tour-card .card__side--front .main-part ul {
+  padding: 0;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  list-style: none;
+}
+.tours .tour-card .card__side--front .main-part ul li {
+  padding-block: 0.5rem;
+  text-align: center;
+  text-decoration: none;
+}
+.tours .tour-card .card__side--front .main-part ul li:not(:last-child) {
+  border-bottom: 1px solid rgba(120, 120, 120, 0.15);
+}
+.tours .tour-card .card__side--back {
+  transform: rotateY(180deg);
+}
+.tours .tour-card:hover .card__side--front {
+  transform: rotateY(-180deg);
+}
+.tours .tour-card:hover .card__side--back {
+  transform: rotateY(0deg);
+}
+
+/*# sourceMappingURL=style.css.map */

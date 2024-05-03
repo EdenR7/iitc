@@ -52,6 +52,7 @@ function startStopTimer(){ // run the timer if its currently close else it will 
         isTimerRun = false;
     }
 }
+
 function generateInitialBoard(size){
     for (let row = 0; row < size; row++) {
         let newRow = [];

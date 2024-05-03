@@ -1,0 +1,39 @@
+//Animations
+@keyframes moveFromLeft {
+    0% {
+      opacity: 0;
+      transform: translateX(-100px);
+    }
+    95% {
+      opacity: 0.5;
+      transform: translateX(15px);
+    }
+    100% {
+      opacity: 1;
+      transform: translate(0);
+    }
+  }
+  @keyframes moveFromRight {
+    0% {
+      opacity: 0;
+      transform: translateX(100px);
+    }
+    95% {
+      opacity: 0.5;
+      transform: translateX(-15px);
+    }
+    100% {
+      opacity: 1;
+      transform: translate(0);
+    }
+  }
+  @keyframes moveFromBottom {
+    0% {
+      opacity: 0;
+      transform: translateY(100px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }

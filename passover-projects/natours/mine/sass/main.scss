@@ -1,0 +1,343 @@
+@import "reset.css";
+@import "utils.css";
+
+@import "base/_animations.scss";
+@import "base/_base.scss";
+@import "base/_typography.scss";
+@import "base/_util.scss";
+
+@import "abstracts/_mixins.scss";
+@import "abstracts/_variables.scss";
+
+@import "layout/_gridTest.scss";
+// 1. Navigate in the cmd to the location
+// 2. npm init 
+// 3. npm install sass --save-dev
+// 4. in the package : "scripts": {
+//     "compile:sass": "sass sass/sass.scss css/style.css -w"
+//   }
+// 5.npm run compile:sass
+
+
+
+.header {
+    height: 95vh;
+    /*There are two bgimg:
+        The linear gradient which mix the colors, it tells to go on the colo scale from
+        right to the second color. The opcaity makes the second img be visible*/
+    background-image: linear-gradient(
+        to right,
+        rgba($color-primary-light, 0.8),
+        rgba($color-primary-dark, 0.8)
+        ),
+        url(../img/hero.jpg);
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: cover;
+    
+    clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
+    position: relative;
+    background-color: $clr-base-100;
+    &__white-icon {
+        @include positionABS(2.5rem, 2.5rem);
+        width: 75px;
+    }
+    
+    &__content {
+        color: $clr-base-0;
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+    
+        h1{
+            font-weight: 400;
+            margin-top: 10.5rem;
+            font-size: 4rem;
+            letter-spacing: 3rem;
+            @include animations(moveFromLeft);
+            /*
+            animation-iteration-count: 2; how many time execute the animation
+            animation-delay: 2s; delay before start the animation
+            animation-timing-function: ease-in; the speed that the animate will play (right now its start slow and than becomes faster);  
+            */
+        }
+        h2{
+            font-weight: 400;
+            margin-top: 0.5rem;
+            font-size: 1.5rem;
+            letter-spacing: 0.75rem;
+            word-spacing: 0.75rem;
+        
+            @include animations(moveFromRight);
+        }
+    }
+    
+    #discover-btn {
+        cursor: pointer;
+        position: relative;
+        margin-top: 4rem;
+        color: $clr-base-500;
+        text-decoration: none;
+        background-color: $clr-base-0;
+        box-shadow: 0px 0px 2px 1px rgb(54, 54, 54, 0.25);
+    
+        animation: moveFromBottom 1s ease-out 0.75s;
+        animation-fill-mode: backwards; /*in case of delay the initial mode will be the 0%*/
+    
+        &:hover {
+            transform: translateY(-1px);
+            box-shadow: 0px 0px 8px 4px rgba($color-box-shadow, 0.35);
+        }
+        &:active {
+            transform: translateY(2px);
+            box-shadow: 0px 0px 8px 4px rgba($color-box-shadow, 0.25);
+        }
+        &::after {
+            content: ""; /*there must be content to the after element*/
+            @include positionABS(0, 0);
+            z-index: -1; /*make sure that the element is behind the parent element*/
+            width: 100%;
+            height: 100%;
+            transition: all 0.5s; /*The changes in the hover mode will took 0.5s*/
+            border-radius: 2rem;
+            color: var(--clr-base-500);
+            background-color: $clr-base-0;
+        }
+        &:hover::after {
+            /*the after element in the hover mode*/
+            opacity: 0; /*at the end the element will be unvisisble*/
+            transform: scale(1.5); /*inflate the size of the element by 1.5*/
+        }
+    }
+    
+    /*
+Another way to center the element  
+.header-content {
+  color: var(--clr-base-0);
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%); // the translate refers to the object iteslf
+                                       thats why it will position the text exactly in the middle
+} */
+}
+.about{
+    width: 100%;
+    padding-block: 10rem;
+    background-color: inherit;
+    &__title--wrapper{
+        margin-bottom: 40px;
+        
+        
+    }
+    .about__main--wrapper{
+        color: $color-text;
+        justify-content: center;
+        gap: 4rem;
+    
+        & h3{
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+        .about__main--text-wrapper{
+            width: 540px;
+            gap: 2rem;
+        }
+        .about-imgs--wrapper{
+            width: 540px;
+            position: relative;
+            .about-img{
+                position: absolute;
+                box-shadow: 0px 0px 8px 4px rgba($color-box-shadow, 0.15);
+                transition: all 0.25s;
+                &:hover{
+                    z-index: 100;
+                    transform: scale(1.1) translateY(-10px);
+                    outline: 1rem solid $color-primary;
+                    outline-offset: 1rem;
+                    border-radius: 12px;
+                    box-shadow: 0px 0px 12px 4px rgba($color-box-shadow, 0.25);
+                }
+            }
+            .img1{
+                top: -20px;
+            }
+            .img2{
+                top: 20px;
+                right: 0;
+            }
+            .img3{
+                top: 100px;
+                left: 100px;
+            }
+        }
+    }
+}
+.features{
+    align-items: center;
+    justify-content: center;
+    gap: 4rem;
+    width: 100%;
+    height: 95vh;
+    background-image: linear-gradient(
+        to right,
+        rgba($color-primary-light, 0.8),
+        rgba($color-primary-dark, 0.8)
+        ),
+        url(../img/nat-4.jpg);
+    background-position: center;
+    background-size: cover;
+    clip-path: polygon(0% 20%, 100% 0, 100% 80%, 0 100%);
+
+    .feature-card{
+        border-radius: 4px;
+        background-color: rgba($clr-base-0, 0.75);
+        padding: 1.5rem;
+        max-width: 15rem;
+        color: $color-text;
+        text-align: center;
+        box-shadow: 0 1.5rem 4rem rgba($clr-base-900, 0.15);
+
+        transition: all 0.25s;
+        &:hover{
+            transform: translateY(-1rem) scale(1.05);
+        }
+        i{
+            background: linear-gradient(
+                to right,
+                $color-primary-light,
+                $color-primary-dark
+            );
+            background-clip: text;
+            color: transparent;
+            font-size: 4rem; //Icons are type of fonts!
+            margin-bottom: 0.5rem;
+        }
+        h3{
+            font-size: 1rem;
+            margin-block: 1rem;
+        }
+        p{
+            
+        }
+    }
+}
+.tours{
+    width: 100%;
+    padding-top: 7rem;
+    padding-bottom: 10rem;
+    
+    .tours__cards {
+        gap: 4rem;
+        justify-content: center;
+    }
+    .tour-card{
+        border-radius: 4px;
+        box-shadow: 0 1.5rem 4rem rgba($clr-base-900, 0.15);
+        overflow: hidden;
+        position: relative;
+        height: 32rem;
+        width: 20rem;
+
+        .card__side-1{
+            background-image: linear-gradient(to right bottom, rgb(255, 185, 0), rgb(255, 119, 48));
+        }
+        .card__side-2{
+            background-image: linear-gradient(to right bottom, rgb(126, 213, 111), rgb(40, 180, 133));
+        }
+        .card__side-3{
+            background-image: linear-gradient(to right bottom, rgb(41, 152, 255), rgb(86, 67, 250));
+        }
+        .card__side{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            transition: all 0.8s ease;
+            
+            backface-visibility: hidden; // act like z-index, hide the parts that lives behind the element
+
+            &--front{
+                .card__header-1{
+                    background-image: linear-gradient(to right bottom, rgb(255, 185, 0), rgb(255, 119, 48)),
+                        url(../img/nat-5.jpg);
+                }
+                .card__header-1 span{
+                    background-image: linear-gradient(to right bottom, rgb(255, 185, 0), rgb(255, 119, 48));
+                }
+                .card__header-2{
+                    background-image: linear-gradient(to right bottom, rgb(126, 213, 111), rgb(40, 180, 133)),
+                        url(../img/nat-6.jpg); 
+                }
+                .card__header-2 span{
+                    background-image: linear-gradient(to right bottom, rgb(126, 213, 111), rgb(40, 180, 133));
+                }
+                .card__header-3{
+                    background-image: linear-gradient(to right bottom, rgb(41, 152, 255), rgb(86, 67, 250)),
+                        url(../img/nat-7.jpg);
+                }
+                .card__header-3 span{
+                    background-image: linear-gradient(to right bottom, rgb(41, 152, 255), rgb(86, 67, 250));
+                }
+                .top-part{
+                    position: relative;
+                    height: 40%;
+                    background-position: center, center;
+                    background-size: cover, cover;
+                    background-blend-mode: screen; // blend two bg
+                    clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+                    text-align: right;
+                    h3{
+                        position: absolute;
+                        color: $clr-base-0;
+                        bottom: 1.5rem;
+                        right: 1rem;
+                        font-weight: 300;
+                        font-size: 28px;
+                        width: 70%;
+                        .card__header--span{ // I wrapped it in a span in order to adjust the bg to the size of the text 
+                            padding: 8px;
+                        }
+                    }
+                }
+                .main-part{
+                    color: $color-text;
+                    width: 100%;
+                    padding: 30px;
+                    height: 60%;
+                    & ul{
+                        padding: 0;
+                        width: 100%;
+                        flex-direction: column;
+                        justify-content: center;
+                        list-style: none;
+                        & li{
+                            padding-block: 0.5rem;
+                            text-align: center;
+                            text-decoration: none;
+                            &:not(:last-child){ // selecting every li that is not the last child of its ul parent
+                                border-bottom: 1px solid rgba($color: $color-text, $alpha: 0.15);
+                            }
+                        }
+                    }
+                }
+            }
+            &--back{
+                transform: rotateY(180deg);
+            }
+            
+        }
+        &:hover .card__side--front{
+            transform: rotateY(-180deg);
+        }
+        &:hover .card__side--back{
+            transform: rotateY(0deg);
+        }
+    }
+
+}
+
+
+
+

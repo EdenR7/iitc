@@ -1,0 +1,57 @@
+
+.flex-group {
+    display: flex;
+    flex-wrap: wrap;
+}
+.btn {
+    cursor: pointer;
+    padding-block: 1rem;
+    padding-inline: 2.5rem;
+    border-radius: 2rem;
+    /* display: inline-block + parent - text-align: center; Will center also the buttons */
+}
+.a-btn{
+    padding: 4px;
+    position: relative;
+    text-decoration: none;
+    color: $color-primary-dark;
+    transition: all 0.25s;
+    &::after{
+        content: "";
+        display: block;
+        position: absolute;
+        margin-top: 2px;
+        background-color: $color-primary-dark;
+        width: 100%;
+        height: 1px;
+    }
+    &:hover{
+        background-color: $color-primary;
+        color: $clr-base-0;
+        transform: translateY(-8px);
+        box-shadow: 0px 0px 4px 2px rgba($color-box-shadow, 0.15);
+    }
+    &:hover::after{
+        display: none;
+    }
+}
+
+.skewed-title{
+    font-size: 2rem;
+    text-align: center;
+    // inheritence color from bg
+    background: linear-gradient(
+        to right,
+        $color-primary-light,
+        $color-primary-dark
+    );
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 5rem;
+    transition: transform 0.2s ease;
+    transform: skewX(0deg) skewY(0deg);
+    &:hover{
+        transform: skewX(15deg) skewY(2deg) scale(1.1); 
+        text-shadow: 0px 4px 4px rgba($color-box-shadow, 0.15);       
+    }
+}

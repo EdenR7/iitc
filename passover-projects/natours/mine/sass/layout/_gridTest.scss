@@ -1,0 +1,12 @@
+$gutter-vertical:5rem;
+
+.row{
+    max-width: 71rem;
+    background-color: $clr-base-500;
+    margin: 0 auto;
+    
+
+    &:not(:last-child){ // everything but the last child
+        margin-bottom: $gutter-vertical;
+    }
+}

@@ -1,0 +1,63 @@
+style.css‏ * {
+  box-sizing: border-box;
+}
+
+.number {
+  height: 39px;
+  background-color: #12161c;
+  width: 100%;
+  border-radius: 15px;
+  border: 2px solid white;
+  display: flex;
+  align-items: center;
+}
+
+.digit_in_number {
+  width: 24px;
+  height: 28px;
+  font-size: 20px;
+  background-color: #3d3d00;
+  display: inline-block;
+  margin: 3px;
+  color: #ffff00;
+  font-weight: bold;
+}
+
+.keyboard_digit {
+  width: 33px;
+  height: 25px;
+  display: inline-block;
+  background-color: #85a0ad;
+  margin: 2px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button {
+  background-image: linear-gradient(#346493, #083868);
+  color: white;
+  border-radius: 10px;
+  border: 1px solid blue;
+  padding: 5px;
+  margin: 3px;
+  cursor: pointer;
+}
+
+.bulls_cows {
+  font-size: 18px;
+  font-weight: bold;
+  width: 50px;
+  display: inline-block;
+}
+
+.bulls {
+  color: darkgreen;
+}
+
+.cows {
+  color: rgb(34, 34, 236);
+}
+
+.selected_class_user_digit {
+  border: 1px solid yellow;
+}

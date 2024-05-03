@@ -146,6 +146,7 @@ function checkGameOver(){
     if (totalPairs == correctMove){
         startStopTimer();
         document.querySelector("#endGameMessage").style.display = "flex";
+        document.getElementById("username-span").innerText = username;
         document.querySelector("#total-time").innerText = clock.displayTimer();
         document.querySelector("#total-moves").innerText = moves;
         document.querySelector("#total-mistakes").innerText = mistakes;        
