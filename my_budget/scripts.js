@@ -50,7 +50,7 @@ function validateDescription(){
     const element = document.getElementById("add-description");
     if (element.value == ""){
         element.style.borderColor = "red";
-        element.placeholder = "Add a description first";
+        displayErrorMessage();
         return false;
     } else{
         element.style.borderColor = "";
@@ -62,11 +62,26 @@ function validateValueInput(){
     const elementValue = element.value;
     if (elementValue == "" || isNaN(elementValue) || elementValue < 0) {
         element.style.borderColor = "red";
+        displayErrorMessage();
+        element.focus()
         return false;
     } else{
         element.style.borderColor = "";
         return true;
     }
+}
+function closeErrorMessage(){
+    document.getElementById("overlay-message").style.display = "none";
+    document.getElementById("general-details").style.opacity = "1";
+    document.getElementById("new-input").style.opacity = "1";
+    document.getElementById("income-expenses").style.opacity = "1";
+    document.getElementById("add-description").focus();
+}
+function displayErrorMessage(){
+    document.getElementById("overlay-message").style.display = "block";
+    document.getElementById("general-details").style.opacity = "0.5";
+    document.getElementById("new-input").style.opacity = "0.5";
+    document.getElementById("income-expenses").style.opacity = "0.5";
 }
 
 // adding new elements functions
