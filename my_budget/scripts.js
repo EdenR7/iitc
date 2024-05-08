@@ -19,7 +19,7 @@ function getDate(){
     const curDate = new Date();
     return `${curDate.toLocaleString('en-US', { month: 'long' })} ${curDate.getFullYear()}`;
 }
-// initialize the totalBudget, if there is history in the local storage it will start from there(akso the web page) 
+// initialize the totalBudget, if there is history in the local storage it will start from there(also the screen) 
 initializeTotalBudget();
 function initializeTotalBudget() {
     if ('budget' in localStorage) {
