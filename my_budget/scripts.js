@@ -49,7 +49,6 @@ document.getElementById("add-description").focus();
 function validateDescription(){
     const element = document.getElementById("add-description");
     if (element.value == ""){
-        element.style.borderColor = "red";
         displayErrorMessage();
         return false;
     } else{
@@ -61,7 +60,6 @@ function validateValueInput(){
     const element = document.getElementById("value");
     const elementValue = element.value;
     if (elementValue == "" || isNaN(elementValue) || elementValue < 0) {
-        element.style.borderColor = "red";
         displayErrorMessage();
         element.focus()
         return false;
@@ -97,7 +95,7 @@ function addMouseEvents(elementID, isIncome) {
     const elementTargetDiv = element.children[element.children.length-1]; // The div wrapper of the new element 
     element.addEventListener('mouseover', function() {
         if (elementTargetDiv.children.length === toAddFlag) {
-            elementTargetDiv.innerHTML += `<button id="cancel-btn" onclick = "removeElement(event)"></button>`;
+            elementTargetDiv.innerHTML += `<i class="fa-regular fa-circle-xmark" id="cancel-btn" onclick = "removeElement(event)"></i>`;
         }
     });
     element.addEventListener('mouseleave', function() { // remove the btn when the mouse left the container
@@ -276,3 +274,31 @@ function expensesInputdisplay() {
     const btnElement = document.querySelector(".img-container");
     btnElement.innerHTML = '<img src="img/red_checkmark.jpeg"  alt="red check mark" />';
 }
+
+const toLightIcon = document.getElementById("toLight");
+const toDarkIcon = document.getElementById("toDark");
+
+toLightIcon.addEventListener("click",()=>{
+    toDarkIcon.classList.add("rotate")
+    toDarkIcon.style.display = "inline-block";
+    toLightIcon.style.display = 'none';
+    document.documentElement.style.setProperty('--clr-primary-400', 'hsl(359, 93%, 61%)');
+    document.documentElement.style.setProperty('--clr-primary-500', 'hsl(120, 100%, 40%)');
+    document.documentElement.style.setProperty('--clr-base-0', 'hsl(0, 0%, 100%)');
+    document.documentElement.style.setProperty('--clr-base-200', 'hsl(0, 0%, 93%)');
+    document.documentElement.style.setProperty('--clr-base-300', 'hsl(0, 0%, 87%)');
+    document.documentElement.style.setProperty('--clr-base-600', 'hsl(0, 0%, 40%)');
+    document.documentElement.style.setProperty('--clr-base-900', 'hsl(0, 0%, 0%)');
+});
+toDarkIcon.addEventListener("click",()=>{
+    toLightIcon.style.display = "inline-block";
+    toDarkIcon.style.display = "none";
+    toLightIcon.classList.add("rotate")
+    document.documentElement.style.setProperty('--clr-primary-400', 'hsl(359, 93%, 71%)');
+    document.documentElement.style.setProperty('--clr-primary-500', 'hsl(120, 100%, 50%)');
+    document.documentElement.style.setProperty('--clr-base-0', 'hsl(211, 38%, 15%)');
+    document.documentElement.style.setProperty('--clr-base-200', 'hsl(0, 0%, 20%)');
+    document.documentElement.style.setProperty('--clr-base-300', 'hsl(0, 0%, 87%)');
+    document.documentElement.style.setProperty('--clr-base-600', 'hsl(0, 0%, 80%)');
+    document.documentElement.style.setProperty('--clr-base-900', 'hsl(0, 0%, 100%)');
+});

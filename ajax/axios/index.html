@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        height: 100vh;
+        width: 100%;
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f9;
+        margin: 0;
+        gap: 20rem;
+        display: flex;
+        justify-content: center;
+      }
+
+      .styled-table {
+        margin: 25px 0;
+        max-width: 400px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+      }
+
+      .styled-table thead tr {
+        background-color: #009879;
+        color: #ffffff;
+        text-align: left;
+      }
+
+      .styled-table th,
+      .styled-table td {
+        padding: 12px 15px;
+      }
+
+      .styled-table tbody tr {
+        border-bottom: 1px solid #020202;
+      }
+
+      .styled-table tbody tr:nth-of-type(even) {
+        background-color: #f3f3f3;
+      }
+
+      .styled-table tbody tr:last-of-type {
+        border-bottom: 2px solid #009879;
+      }
+
+      .styled-table tbody tr.active-row {
+        font-weight: bold;
+        color: #009879;
+      }
+      .styled-list {
+        list-style-type: none;
+        padding: 0;
+        margin: 25px 0;
+        max-width: 400px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+        background-color: #ffffff;
+      }
+
+      .styled-list li {
+        padding: 12px 15px;
+        border-bottom: 1px solid #dddddd;
+      }
+
+      .styled-list li:nth-of-type(even) {
+        background-color: #f3f3f3;
+      }
+
+      .styled-list li:first-of-type {
+        font-weight: bold;
+        background-color: #009879;
+        color: #ffffff;
+        text-align: left;
+      }
+      .styled-list li:last-of-type {
+        border-bottom: 2px solid #009879;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="list-container">
+      <ul id="ul-element" class="styled-list">
+        <li>Repositories List <span id="repo-counter"></span></li>
+      </ul>
+    </div>
+    <div class="table-container">
+      <table class="styled-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+          </tr>
+        </thead>
+        <tbody id="table-element"></tbody>
+      </table>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
+    <script src="index.js"></script>
+  </body>
+</html>

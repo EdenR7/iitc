@@ -1,0 +1,85 @@
+@import url(reset.css);
+
+body,
+html {
+  height: 100vh;
+  width: 100%;
+}
+body {
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  background-image: url(img/sunset.jpeg);
+  background-size: cover;
+  background-position: center;
+  justify-content: center;
+  align-items: center;
+}
+.flex-group {
+  display: flex;
+  text-wrap: wrap;
+}
+main {
+  max-width: 500px;
+  padding: 8px;
+  transform: translateY(-1rem);
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.5rem;
+}
+.main-title {
+  font-weight: 500;
+  padding-inline: 8px;
+  font-size: 3rem;
+}
+.sub-title {
+  font-size: 1.3rem;
+  font-weight: 400;
+}
+input {
+  border: 0;
+  border-radius: 4px;
+  width: 100%;
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.5);
+  padding-block: 8px;
+  padding-inline: 10px;
+}
+input:focus {
+  outline: none;
+}
+button {
+  cursor: pointer;
+  border: 0;
+  border-radius: 4px;
+  margin-top: 1rem;
+  background-color: hsl(240, 100%, 65%);
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.5);
+  color: white;
+  padding-block: 8px;
+  padding-inline: 12px;
+}
+button:hover {
+  background-color: hsl(240, 100%, 70%);
+}
+button:active {
+  transform: translateY(2px);
+}
+#response {
+  display: none;
+  text-align: left;
+  margin-top: 1rem;
+  width: 100%;
+  padding-inline: 0.5rem;
+  padding-block: 0.75rem;
+  background-color: hsl(107, 45%, 90%, 0.8);
+  color: hsl(120, 100%, 20%);
+}
+#error-response {
+  display: none;
+  margin-top: 1rem;
+  width: 100%;
+  padding-inline: 0.5rem;
+  padding-block: 0.75rem;
+  background-color: hsl(342, 45%, 90%, 0.8);
+  color: hsl(0, 100%, 25%);
+}
