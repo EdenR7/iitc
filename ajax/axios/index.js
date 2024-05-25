@@ -9,7 +9,7 @@ async function axios_01(url) {
         console.log(error);
     }
 }
-// axios_01('https://api.github.com/users/NathanKr/repos');
+axios_01('https://api.github.com/users/NathanKr/repos');
 
 async function axios_015(url) {
     const names = [];
@@ -45,7 +45,7 @@ async function axios_015(url) {
     }
     return names
 }
-// axios_015('https://api.github.com/users/NathanKr/repos')
+axios_015('https://api.github.com/users/NathanKr/repos')
 
 
 function axios_02() {

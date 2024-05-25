@@ -6,12 +6,21 @@ const getUser = ()=> {
         }, 1000);
     })
 }
-const fetchPosts = ()=> {
+const fetchPosts = (i)=> {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
-            resolve(['Post1', 'Post2']);    
-        }, 2000);
+            if (i>10) {
+                reject("NONE")
+            }else{
+                resolve(['Post1', 'Post2']);
+            }    
+        }, 200);
     })
+    // return new Promise((resolve, reject) => {
+    //     setTimeout(() => {
+    //         resolve(['Post1', 'Post2']);    
+    //     }, 2000);
+    // })
 }
 
 // getUser()
@@ -27,8 +36,6 @@ const fetchPosts = ()=> {
 //     .catch(err => console.log(err))
 
 
-
-//7
 
 // //Promise.all- function_7
 // const promises = [

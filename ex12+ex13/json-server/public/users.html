@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="overlay-message">
+      <i class="close close-overlay fa-solid fa-xmark"></i>
+      <h2 class="error-title">There was an Error</h2>
+      <p class="error-text">
+        We couldnt find this user ID. <br />Please make sure the ID is Exist or
+        try again later!
+      </p>
+    </div>
+    <nav class="navbar">
+      <div class="navbar-brand">
+        <h3>myBooks</h3>
+      </div>
+      <ul class="navbar-nav">
+        <li>
+          <a href="#"><i class="current fa-regular fa-user"></i></a>
+        </li>
+        <li>
+          <a href="books.html"><i class="fa-solid fa-book-open"></i></a>
+        </li>
+      </ul>
+    </nav>
+    <main>
+      <div class="buttons-container">
+        <button
+          onclick="getAllUsers()"
+          id="display-users"
+          type="button"
+          class="btn"
+        >
+          Show All Users
+        </button>
+        <button
+          onclick="createUserForm()"
+          id="display-create"
+          type="button"
+          class="btn"
+        >
+          Create User
+        </button>
+        <button
+          onclick="deleteUserForm()"
+          id="display-delete"
+          type="button"
+          class="btn"
+        >
+          Delete User
+        </button>
+        <button
+          onclick="updateUserForm()"
+          id="display-update"
+          type="button"
+          class="btn"
+        >
+          Update User
+        </button>
+      </div>
+      <div id="users-table-wrapper" class="table-container">
+        <h1>Users Table</h1>
+        <i
+          onclick="closeAllUsers()"
+          id="close-users"
+          class="close fa-solid fa-xmark"
+        ></i>
+        <table id="users-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>First Name</th>
+              <th>Last Name</th>
+            </tr>
+          </thead>
+          <tbody id="users-body"></tbody>
+        </table>
+        <div class="navigate-pages">
+          <button class="prev btn" onclick="prevPage()">
+            <i class="arrow fa-solid fa-arrow-left"></i> prev
+          </button>
+          <button class="next btn" onclick="nextPage()">
+            next <i class="arrow fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+      </div>
+      <div id="create-user-wrapper" class="form-container">
+        <h2>Create User</h2>
+        <i class="close close-form fa-solid fa-xmark"></i>
+        <form id="create-user">
+          <div class="form-group">
+            <label for="create-first-name">First Name</label>
+            <input type="text" id="create-first-name" name="firstName" />
+          </div>
+          <div class="form-group">
+            <label for="create-last-name">Last Name</label>
+            <input type="text" id="create-last-name" name="lastName" />
+          </div>
+          <div class="form-group">
+            <button class="btn" type="submit">Submit</button>
+          </div>
+        </form>
+      </div>
+      <div id="delete-user-wrapper" class="form-container">
+        <h2>Delete User</h2>
+        <i class="close close-form fa-solid fa-xmark"></i>
+        <form id="delete-user">
+          <div class="form-group">
+            <label for="delete-id">ID</label>
+            <input type="text" id="delete-id" name="id" />
+          </div>
+          <div class="form-group">
+            <button class="btn" type="submit">Submit</button>
+          </div>
+        </form>
+      </div>
+      <div id="update-user-wrapper" class="form-container">
+        <h2>Update User</h2>
+        <i class="close close-form fa-solid fa-xmark"></i>
+        <form id="update-user">
+          <div class="form-group">
+            <label for="update-id">ID</label>
+            <input type="text" id="update-id" name="id" />
+          </div>
+          <div class="form-group">
+            <label for="update-first-name">First Name</label>
+            <input
+              placeholder="You can leave it empty"
+              type="text"
+              id="update-first-name"
+              name="firstName"
+            />
+          </div>
+          <div class="form-group">
+            <label for="update-last-name">Last Name</label>
+            <input
+              placeholder="You can leave it empty"
+              type="text"
+              id="update-last-name"
+              name="lastName"
+            />
+          </div>
+          <div class="form-group">
+            <button type="submit">Submit</button>
+          </div>
+        </form>
+      </div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
+    <script src="js/users.js"></script>
+    <script src="js/utils.js"></script>
+  </body>
+</html>

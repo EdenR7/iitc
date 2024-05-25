@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="overlay-message">
+      <i class="close close-overlay fa-solid fa-xmark"></i>
+      <h2 class="error-title">There was an Error</h2>
+      <p class="error-text">
+        We couldnt find this user ID. <br />Please make sure the ID is Exist or
+        try again later!
+      </p>
+    </div>
+    <nav class="navbar">
+      <div class="navbar-brand">
+        <h3>myBooks</h3>
+      </div>
+      <ul class="navbar-nav">
+        <li>
+          <a href="users.html"><i class="fa-regular fa-user"></i></a>
+        </li>
+        <li>
+          <a href="#"><i class="current fa-solid fa-book-open"></i></a>
+        </li>
+      </ul>
+    </nav>
+    <main>
+      <div class="buttons-container">
+        <button
+          onclick="getAllBooks()"
+          id="display-books"
+          type="button"
+          class="btn"
+        >
+          Show All Books
+        </button>
+        <button
+          onclick="createBooksForm()"
+          id="display-create"
+          type="button"
+          class="btn"
+        >
+          Create Books
+        </button>
+        <button
+          onclick="deleteBooksForm()"
+          id="display-delete"
+          type="button"
+          class="btn"
+        >
+          Delete Books
+        </button>
+        <button
+          onclick="updateBooksForm()"
+          id="display-update"
+          type="button"
+          class="btn"
+        >
+          Update Books
+        </button>
+      </div>
+      <div id="books-table-wrapper" class="table-container">
+        <h1>Books Table</h1>
+        <i
+          onclick="closeAllBooks()"
+          id="close-books"
+          class="close fa-solid fa-xmark"
+        ></i>
+        <table id="books-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Author</th>
+              <th>Number of pages</th>
+            </tr>
+          </thead>
+          <tbody id="books-body"></tbody>
+        </table>
+        <div class="navigate-pages">
+          <button class="prev btn" onclick="prevPage()">
+            <i class="arrow fa-solid fa-arrow-left"></i> prev
+          </button>
+          <button class="next btn" onclick="nextPage()">
+            next <i class="arrow fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+      </div>
+      <div id="create-book-wrapper" class="form-container">
+        <h2>Add new book</h2>
+        <i class="close close-form fa-solid fa-xmark"></i>
+        <form id="create-book">
+          <div class="form-group">
+            <label for="create-name">Book's Name</label>
+            <input type="text" id="create-name" name="name" />
+          </div>
+          <div class="form-group">
+            <label for="create-author">Book's author</label>
+            <input type="text" id="create-author" name="author" />
+          </div>
+          <div class="form-group">
+            <label for="create-pages">Book's total pages</label>
+            <input type="text" id="create-pages" name="numPages" />
+          </div>
+          <div class="form-group">
+            <button class="btn" type="submit">Submit</button>
+          </div>
+        </form>
+      </div>
+      <div id="delete-book-wrapper" class="form-container">
+        <h2>Delete Book</h2>
+        <i class="close close-form fa-solid fa-xmark"></i>
+        <form id="delete-book">
+          <div class="form-group">
+            <label for="delete-id">ID</label>
+            <input type="text" id="delete-id" name="id" />
+          </div>
+          <div class="form-group">
+            <button class="btn" type="submit">Submit</button>
+          </div>
+        </form>
+      </div>
+      <div id="update-book-wrapper" class="form-container">
+        <h2>Update Book</h2>
+        <i class="close close-form fa-solid fa-xmark"></i>
+        <form id="update-book">
+          <div class="form-group">
+            <label for="update-id">ID</label>
+            <input type="text" id="update-id" name="id" />
+          </div>
+          <div class="form-group">
+            <label for="update-name">Book's edited name</label>
+            <input
+              placeholder="You can leave it empty"
+              type="text"
+              id="update-name"
+              name="name"
+            />
+          </div>
+          <div class="form-group">
+            <label for="update-author">Book's edited author</label>
+            <input
+              placeholder="You can leave it empty"
+              type="text"
+              id="update-author"
+              name="author"
+            />
+          </div>
+          <div class="form-group">
+            <label for="update-pages">Book's edited number of pages</label>
+            <input
+              placeholder="You can leave it empty"
+              type="number"
+              id="update-pages"
+              name="numPages"
+            />
+          </div>
+          <div class="form-group">
+            <button type="submit">Submit</button>
+          </div>
+        </form>
+      </div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
+    <script src="js/books.js"></script>
+    <script src="js/utils.js"></script>
+  </body>
+</html>
