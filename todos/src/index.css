@@ -8,7 +8,8 @@ body {
   width: 100%;
 }
 body {
-  padding-block: 2rem;
+  font-family: "Open Sans", sans-serif;
+  padding: 4rem;
 }
 .flex-group {
   display: flex;
@@ -34,12 +35,15 @@ h3 {
   color: var(--clr-primary-700);
 }
 ul {
-  display: flex;
-  flex-direction: column;
   list-style: none;
-  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+li {
+ 
 }
 
+/* Add new */
 .new-todo-form {
   margin-top: 1rem;
   align-items: center;
@@ -57,6 +61,8 @@ ul {
   background-color: var(--clr-primary-700);
   color: azure;
 }
+
+/* Statistics */
 .statistics-container {
   margin-block: 1rem;
   align-items: center;
@@ -65,8 +71,7 @@ ul {
 .statistics {
   flex-direction: column;
 }
-.statistics__total{
-  
+.statistics__total {
 }
 .statistics__completed {
   color: hsl(120, 100%, 40%);
@@ -78,15 +83,28 @@ ul {
   height: 2.5rem;
 }
 
+/* Todos elements */
+.todos-lst {
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+}
 .todo-container {
+  justify-content: space-between;
+  word-break: break;
+  align-items: center;
   position: relative;
-  width: 500px;
+  width: 550px;
   gap: 1rem;
   border: 1px solid var(--clr-primary-700);
   padding: 1rem;
   margin-block: 1rem;
-  margin-inline: 3rem;
 }
+.todo-details-wrapper {
+  align-items: center;
+  gap: 1rem;
+}
+
 .completed {
   color: hsl(0, 0%, 60%);
 }
@@ -96,13 +114,49 @@ ul {
   aspect-ratio: 1;
 }
 .remove-todo {
-  position: absolute;
-  right: .5rem;
+  right: 0.5rem;
   top: 1rem;
   background-color: inherit;
-}
-.remove-todo i{
   color: red;
   font-size: 1rem;
 }
 
+/* Checkbox design */
+.toggle-wrapper {
+  cursor: pointer;
+  position: relative;
+  width: 3rem;
+  height: 28px;
+  background-color: hsl(0, 0%, 85%);
+  border-radius: 1rem;
+}
+.completed__toggle-wrapper {
+  background-color: hsl(0, 0%, 95%);
+}
+.checkbox-element {
+  display: none;
+}
+.slider {
+  position: absolute;
+  content: "";
+  width: 1.05rem;
+  height: 1rem;
+  border-radius: 50%;
+  left: 5px;
+  top: 5px;
+  background: var(--clr-primary-700);
+  transition: all 0.4s;
+}
+.checkbox-element:checked + .slider {
+  transform: translateX(1.25rem);
+  background-color: hsl(240, 100%, 70%);
+}
+
+/* Filter */
+.filter-container {
+  flex-direction: column;
+  gap: 1rem;
+}
+.filter-btns {
+  gap: 0.5rem;
+}
