@@ -1,4 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
+import TodoStatistics from "./app_components/todoStatistics";
+import { TodoList } from "./app_components/todoList";
+import AddTodoForm from "./app_components/addTodoForm";
+import FilterTodos from "./app_components/filterTodos";
 const todosUrl = "http://localhost:8001/todos";
 
 function makeId(length) {
@@ -12,151 +16,6 @@ function makeId(length) {
   return result;
 }
 
-function TodoItem(props) {
-  const todo = props.todo;
-  return (
-    <li className="todo-container flex-group">
-      <div className="todo-details-wrapper flex-group">
-        <label
-          className={`${
-            todo.isComplete ? "completed__toggle-wrapper" : ""
-          } toggle-wrapper`}
-        >
-          <input
-            name="check-input"
-            checked={todo.isComplete}
-            onChange={() => {
-              props.updateIsComplete(todo.id);
-            }}
-            type="checkbox"
-            className="checkbox-element"
-          />
-          <div className="slider"> </div>
-        </label>
-
-        <h3 className={`${todo.isComplete ? "completed" : ""} todo-title`}>
-          {todo.title}
-        </h3>
-      </div>
-      <button
-        onClick={() => {
-          props.removeTodo(todo.id);
-        }}
-        className="btn remove-todo"
-      >
-        <i className="fa-solid fa-xmark"></i>
-      </button>
-    </li>
-  );
-}
-
-function TodoList(props) {
-  return (
-    <>
-      <ul className="todos-lst">
-        {props.todos.map((todo) => {
-          return (
-            <TodoItem
-              key={todo.id}
-              updateIsComplete={props.updateIsComplete}
-              removeTodo={props.removeTodo}
-              todo={todo}
-            />
-          );
-        })}
-      </ul>
-    </>
-  );
-}
-
-function TodoStatistics(props) {
-  return (
-    <div className="flex-group statistics-container">
-      <progress
-        id="progress"
-        value={props.totalTodos ? props.calculateProgress() : 0}
-        max="100"
-      ></progress>
-      <div className="statistics flex-group">
-        <h4 className="statistics__total">{props.totalTodos} Tasks</h4>
-        <p className="statistics__completed">
-          {props.completedTodos} completed
-        </p>
-        <p className="statistics__active">{props.activeTodos} active todos</p>
-      </div>
-    </div>
-  );
-}
-
-function AddTodoForm(props) {
-  return (
-    <form
-      onSubmit={(event) => {
-        props.addNewTodo(event);
-      }}
-      className="flex-group new-todo-form"
-    >
-      <input
-        ref={props.newTodoInputRef}
-        onChange={(event) => {
-          props.handleNewTodoChange(event);
-        }}
-        value={props.newTodo}
-        id="new-todo-name"
-        type="text"
-        placeholder="New Todo ..."
-      />
-      <button className="btn" type="submit">
-        Add New Todo
-      </button>
-    </form>
-  );
-}
-
-function FilterTodos(props) {
-  return (
-    <>
-      <div className="filter-container flex-group">
-        <div className="filter-btns flex-group">
-          <button
-            onClick={() => {
-              props.filterByActive();
-            }}
-            className="btn"
-          >
-            Active Todos
-          </button>
-          <button
-            onClick={() => {
-              props.filterByCompleted();
-            }}
-            className="btn"
-          >
-            Complete Todos
-          </button>
-          <button
-            onClick={() => {
-              props.resetFilters();
-            }}
-            className="btn"
-          >
-            Reset Filters
-          </button>
-        </div>
-        <div className="search-warpper">
-          <input
-            ref={props.filterTodoInputRef}
-            onChange={() => {
-              props.handleSearchTodoChange();
-            }}
-            type="text"
-          />
-        </div>
-      </div>
-    </>
-  );
-}
-
 function App() {
   // STATES
   const [todos, setTodos] = useState([]);
@@ -165,7 +24,7 @@ function App() {
 
   //USE_REFS
   const newTodoInputRef = useRef(null);
-  let newTodoTitleRef = useRef(""); // ex7-Want sure what to do
+  let newTodoTitleRef = useRef(""); // ex7-Wasnt sure what to do
   const filterTodoInputRef = useRef(null);
   let filterTodoTitleRef = useRef("");
   const onFilterRef = useRef(false);
@@ -217,7 +76,7 @@ function App() {
       });
     } catch (error) {}
   }
-  //Local operations
+  //CRUD Local and DOM operations
   async function updateIsComplete(todoID) {
     const updatedTodos = todos.map((todo) => {
       if (todo.id === todoID) {
@@ -235,15 +94,21 @@ function App() {
     });
     setTodos(updatedTodos);
     if (filterTodos.length > 0) {
-      const updatedFilterTodos = filterTodos.filter(
-        (todo) => todo.id !== todoID
-      );
+      const updatedFilterTodos = filterTodos.map((todo) => {
+        if (todo.id === todoID) {
+          return {
+            ...todo,
+            isComplete: todo.isComplete ? false : true,
+          };
+        }
+        return todo;
+      });
       setFilterTodos(updatedFilterTodos);
     }
   }
   function handleNewTodoChange(event) {
     event.preventDefault();
-    newTodoTitleRef = newTodoInputRef.current.value; // ex7-Want sure what to do
+    newTodoTitleRef = newTodoInputRef.current.value; // ex7-Wasnt sure what to do
     setNewTodo(event.target.value);
   }
 
@@ -292,7 +157,6 @@ function App() {
       throw error;
     }
   }
-
   async function filterByCompleted() {
     try {
       onFilterRef.current = true;
