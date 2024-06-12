@@ -18,16 +18,16 @@ function makeId(length) {
 
 function App() {
   // STATES
-  const [todos, setTodos] = useState([]);
-  const [newTodo, setNewTodo] = useState("");
-  const [filterTodos, setFilterTodos] = useState([]);
+  const [todos, setTodos] = useState([]); //All todos state
+  const [newTodo, setNewTodo] = useState(""); // Add new todo input state
+  const [newFilterInput, setNewFilterInput] = useState(""); // Filter search input state
+  const [filterOnActive, setFilterOnActive] = useState(false); // State for filter by active
+  const [filterOnComplete, setFilterOnComplete] = useState(false); // State for filter by complete
 
   //USE_REFS
   const newTodoInputRef = useRef(null);
   let newTodoTitleRef = useRef(""); // ex7-Wasnt sure what to do
   const filterTodoInputRef = useRef(null);
-  let filterTodoTitleRef = useRef("");
-  const onFilterRef = useRef(false);
   const timeoutRef = useRef(null);
 
   //DERIVED STATES
@@ -37,6 +37,17 @@ function App() {
     return acc;
   }, 0);
   const activeTodos = totalTodos - completedTodos;
+
+  const filteredItems = // Those lines are filtered the todos
+    !filterOnActive && !filterOnComplete //The default, as long as the user didnt press one of the filters buttons
+      ? todos.filter((todo) =>
+          todo.title
+            .toLocaleLowerCase()
+            .includes(newFilterInput.toLocaleLowerCase())
+        )
+      : filterOnActive // if the user press one of the options it will check which button pressed
+      ? todos.filter((todo) => !todo.isComplete)
+      : todos.filter((todo) => todo.isComplete);
 
   //Initialize the todos
   useEffect(() => {
@@ -48,7 +59,7 @@ function App() {
     setTodos(updatedTodos);
   }
 
-  //SERVER CRUD
+  //ONLY SERVER CRUD
   async function updateTodoStatusOnServer(todo, newStatus) {
     const res = await fetch(`${todosUrl}/${todo.id}`, {
       method: "PATCH",
@@ -76,26 +87,19 @@ function App() {
       });
     } catch (error) {}
   }
-  //CRUD Local and DOM operations
+  //SERVER AND LOCAL CRUD
   async function updateIsComplete(todoID) {
-    const updatedTodos = todos.map((todo) => {
-      if (todo.id === todoID) {
-        try {
-          updateTodoStatusOnServer(todo, todo.isComplete ? false : true).then();
-        } catch (error) {
-          throw error;
-        }
-        return {
-          ...todo,
-          isComplete: todo.isComplete ? false : true,
-        };
-      }
-      return todo;
-    });
-    setTodos(updatedTodos);
-    if (filterTodos.length > 0) {
-      const updatedFilterTodos = filterTodos.map((todo) => {
+    try {
+      const updatedTodos = todos.map((todo) => {
         if (todo.id === todoID) {
+          try {
+            updateTodoStatusOnServer(
+              todo,
+              todo.isComplete ? false : true
+            ).then();
+          } catch (error) {
+            throw error;
+          }
           return {
             ...todo,
             isComplete: todo.isComplete ? false : true,
@@ -103,7 +107,9 @@ function App() {
         }
         return todo;
       });
-      setFilterTodos(updatedFilterTodos);
+      setTodos(updatedTodos);
+    } catch (err) {
+      console.error(err);
     }
   }
   function handleNewTodoChange(event) {
@@ -113,29 +119,33 @@ function App() {
   }
 
   async function addNewTodo(event) {
-    if (!newTodo) return;
-    event.preventDefault();
-    const todoToAdd = {
-      id: makeId,
-      title: newTodo,
-      isComplete: false,
-    };
-    const updatedTodos = [...todos, todoToAdd];
+    try {
+      if (!newTodo) return;
+      event.preventDefault();
+      const todoToAdd = {
+        id: makeId,
+        title: newTodo,
+        isComplete: false,
+      };
+      const updatedTodos = [...todos, todoToAdd];
 
-    setTodos(updatedTodos);
-    await addNewTodoToServer(todoToAdd);
-    setNewTodo("");
+      setTodos(updatedTodos);
+      await addNewTodoToServer(todoToAdd);
+      setNewTodo("");
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   async function removeTodo(id) {
-    const updatedTodos = todos.filter((todo) => {
-      return todo.id !== id;
-    });
-    await removeTodoFromServer(id);
-    setTodos(updatedTodos);
-    if (onFilterRef) {
-      const updatedFilterTodos = filterTodos.filter((todo) => todo.id !== id);
-      setFilterTodos(updatedFilterTodos);
+    try {
+      const updatedTodos = todos.filter((todo) => {
+        return todo.id !== id;
+      });
+      await removeTodoFromServer(id);
+      setTodos(updatedTodos);
+    } catch (err) {
+      console.error(err);
     }
   }
 
@@ -145,55 +155,34 @@ function App() {
   }
 
   //Filters
-  async function filterByActive() {
-    // get all the filters from api req
-    try {
-      onFilterRef.current = true;
-      const res = await fetch(`${todosUrl}?isComplete=false`);
-      const activeTodos = await res.json();
-      filterTodoTitleRef.current = "";
-      setFilterTodos(activeTodos);
-    } catch (error) {
-      throw error;
-    }
+  function filterByActive() {
+    setFilterOnComplete(false);
+    setFilterOnActive(true);
   }
-  async function filterByCompleted() {
-    try {
-      onFilterRef.current = true;
-      const res = await fetch(`${todosUrl}?isComplete=true`);
-      const activeTodos = await res.json();
-      filterTodoTitleRef = "";
-      setFilterTodos(activeTodos);
-    } catch (error) {
-      throw error;
-    }
+  function filterByCompleted() {
+    setFilterOnActive(false);
+    setFilterOnComplete(true);
   }
 
-  function filterByName() {
-    onFilterRef.current = true;
-    const updatedFilteredTodos = todos.filter((todo) =>
-      todo.title
-        .toLocaleLowerCase()
-        .includes(filterTodoTitleRef.current.toLocaleLowerCase())
-    );
-    setFilterTodos(updatedFilteredTodos);
-  }
   function handleSearchTodoChange() {
-    filterTodoTitleRef.current = filterTodoInputRef.current.value;
+    //The state that cause the filter of the todos on the screen will happened inside that debounce
     debounce();
   }
   function debounce() {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    timeoutRef.current = setTimeout(filterByName, 400);
+    timeoutRef.current = setTimeout(() => {
+      setFilterOnActive(false);
+      setFilterOnComplete(false);
+      setNewFilterInput(filterTodoInputRef.current.value); // The state the rerender the ui according to the search
+    }, 400);
   }
 
   function resetFilters() {
-    onFilterRef.current = false;
-    filterTodoTitleRef.current = ""; // reset the userRef last search
+    setFilterOnComplete(false);
+    setFilterOnActive(false);
     filterTodoInputRef.current.value = "";
-    setFilterTodos([]);
+    setNewFilterInput("");
   }
-
   //Greet
   useEffect(() => {
     console.log("Hello");
@@ -222,9 +211,8 @@ function App() {
       />
       {todos.length === 0 ? <p>"No todos available"</p> : null}
       <FilterTodos
-        filterByName={filterByName}
+        newFilterInput={newFilterInput}
         filterTodoInputRef={filterTodoInputRef}
-        filterTodoTitleRef={filterTodoTitleRef}
         handleSearchTodoChange={handleSearchTodoChange}
         resetFilters={resetFilters}
         filterByCompleted={filterByCompleted}
@@ -232,7 +220,7 @@ function App() {
       />
       <TodoList
         removeTodo={removeTodo}
-        todos={onFilterRef.current ? filterTodos : todos}
+        todos={filteredItems}
         updateIsComplete={updateIsComplete}
       />
     </>

@@ -8,12 +8,12 @@
     {
       "id": "2",
       "title": "Build a Todo App",
-      "isComplete": false
+      "isComplete": true
     },
     {
       "id": "3",
       "title": "Read JavaScript Documentation",
-      "isComplete": true
+      "isComplete": false
     },
     {
       "id": "4",
@@ -43,7 +43,7 @@
     {
       "id": "9",
       "title": "Optimize Performance",
-      "isComplete": false
+      "isComplete": true
     },
     {
       "id": "10",
@@ -51,7 +51,7 @@
       "isComplete": false
     },
     {
-      "id": "9cc3",
+      "id": "5cdc",
       "title": "eden",
       "isComplete": false
     }

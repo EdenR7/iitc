@@ -30,15 +30,16 @@ export default function FilterTodos(props) {
             Reset Filters
           </button>
         </div>
-        <div className="search-warpper">
+        <div className="search-warpper flex-group">
           <input
-          placeholder="Search desired Todo ..."
+            placeholder="Search desired Todo ..."
             ref={props.filterTodoInputRef}
             onChange={() => {
               props.handleSearchTodoChange();
             }}
             type="text"
           />
+          <i class="fa-solid fa-magnifying-glass"></i>
         </div>
       </div>
     </>

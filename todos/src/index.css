@@ -4,8 +4,9 @@
   --clr-primary-300: hsl(18, 74%, 66%);
   --clr-primary-700: hsl(194, 100%, 27%);
   --clr-primary-800: hsl(194, 100%, 24%);
-  /* --clr-primary-700: hsl(240, 100%, 30%); */
+
   --clr-neutral-100: hsl(0, 0%, 100%);
+  --clr-neutral-150: hsl(0, 0%, 90%);
   --clr-neutral-200: hsl(0, 0%, 85%);
   --clr-neutral-400: hsl(0, 0%, 60%);
   --clr-neutral-800: hsl(0, 0%, 15%);
@@ -56,6 +57,7 @@ ul {
   padding: 0;
 }
 input {
+  background-color: var(--clr-neutral-100);
   color: var(--clr-primary-800);
   border: 1px solid var(--clr-primary-700);
   padding-block: 0.3rem;
@@ -175,6 +177,19 @@ input {
 .filter-btns {
   gap: 0.5rem;
 }
-.search-warpper input {
+.search-warpper {
+  align-items: center;
+  background-color: var(--clr-neutral-100);
   width: 20rem;
+  border: 1px solid var(--clr-primary-700);
+}
+.search-warpper i{
+  color: var(--clr-neutral-400);
+  padding-inline: .5rem;
+}
+.search-warpper input {
+  background-color: inherit;
+  border: 0;
+  border-radius: 4px;
+  flex: 1;
 }
