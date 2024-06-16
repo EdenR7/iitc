@@ -1,20 +1,10 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useMemo } from "react";
+import axios from "axios";
 import TodoStatistics from "./app_components/todoStatistics";
 import { TodoList } from "./app_components/todoList";
 import AddTodoForm from "./app_components/addTodoForm";
 import FilterTodos from "./app_components/filterTodos";
 const todosUrl = "http://localhost:8001/todos";
-
-function makeId(length) {
-  let result = "";
-  const characters =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  const charactersLength = characters.length;
-  for (let i = 0; i < length; i++) {
-    result += characters.charAt(Math.floor(Math.random() * charactersLength));
-  }
-  return result;
-}
 
 function App() {
   // STATES
@@ -23,98 +13,100 @@ function App() {
   const [newFilterInput, setNewFilterInput] = useState(""); // Filter search input state
   const [filterOnActive, setFilterOnActive] = useState(false); // State for filter by active
   const [filterOnComplete, setFilterOnComplete] = useState(false); // State for filter by complete
+  const [loading, setLoading] = useState(false);
 
   //USE_REFS
   const newTodoInputRef = useRef(null);
-  let newTodoTitleRef = useRef(""); // ex7-Wasnt sure what to do
   const filterTodoInputRef = useRef(null);
   const timeoutRef = useRef(null);
 
   //DERIVED STATES
-  const totalTodos = todos.length;
-  const completedTodos = todos.reduce((acc, todo) => {
-    if (todo.isComplete) acc += 1;
-    return acc;
-  }, 0);
-  const activeTodos = totalTodos - completedTodos;
-
-  const filteredItems = // Those lines are filtered the todos
-    !filterOnActive && !filterOnComplete //The default, as long as the user didnt press one of the filters buttons
+  const filteredItems = useMemo(() => {
+    // this hook specify when It should run the code
+    return !filterOnActive && !filterOnComplete //The default, as long as the user didnt press one of the filters buttons
       ? todos.filter((todo) =>
-          todo.title
-            .toLocaleLowerCase()
-            .includes(newFilterInput.toLocaleLowerCase())
+          todo.title.toLocaleLowerCase().includes(newFilterInput.toLowerCase())
         )
       : filterOnActive // if the user press one of the options it will check which button pressed
       ? todos.filter((todo) => !todo.isComplete)
       : todos.filter((todo) => todo.isComplete);
+  }, [newFilterInput, filterOnActive, filterOnComplete, todos]);
 
   //Initialize the todos
   useEffect(() => {
     getTodos();
   }, []);
   async function getTodos() {
-    const response = await fetch(todosUrl);
-    const updatedTodos = await response.json();
-    setTodos(updatedTodos);
+    try {
+      setLoading(true);
+      const response = await fetch(todosUrl);
+      const updatedTodos = await response.json();
+      setTodos(updatedTodos);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
   }
 
   //ONLY SERVER CRUD
   async function updateTodoStatusOnServer(todo, newStatus) {
-    const res = await fetch(`${todosUrl}/${todo.id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ ...todo, isComplete: newStatus }),
-    });
+    try {
+      const res = await fetch(`${todosUrl}/${todo.id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ ...todo, isComplete: newStatus }),
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }
   async function addNewTodoToServer(newTodo) {
     try {
-      await fetch(todosUrl, {
+      const res = await fetch(todosUrl, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ ...newTodo }),
       });
-    } catch (error) {}
+      return await res.json();
+    } catch (error) {
+      throw error;
+    }
   }
   async function removeTodoFromServer(todoId) {
     try {
       await fetch(`${todosUrl}/${todoId}`, {
         method: "DELETE",
       });
-    } catch (error) {}
+    } catch (error) {
+      throw error;
+    }
   }
   //SERVER AND LOCAL CRUD
-  async function updateIsComplete(todoID) {
+  async function updateIsComplete(todoToUpdate) {
     try {
-      const updatedTodos = todos.map((todo) => {
-        if (todo.id === todoID) {
-          try {
-            updateTodoStatusOnServer(
-              todo,
-              todo.isComplete ? false : true
-            ).then();
-          } catch (error) {
-            throw error;
+      updateTodoStatusOnServer(todoToUpdate, !todoToUpdate.isComplete);
+      setTodos((prevTodos) => {
+        return prevTodos.map((todo) => {
+          if (todo.id === todoToUpdate.id) {
+            return {
+              ...todo,
+              isComplete: !todoToUpdate.isComplete,
+            };
           }
-          return {
-            ...todo,
-            isComplete: todo.isComplete ? false : true,
-          };
-        }
-        return todo;
+          return todo;
+        });
       });
-      setTodos(updatedTodos);
     } catch (err) {
       console.error(err);
     }
   }
   function handleNewTodoChange(event) {
     event.preventDefault();
-    newTodoTitleRef = newTodoInputRef.current.value; // ex7-Wasnt sure what to do
     setNewTodo(event.target.value);
   }
 
@@ -123,14 +115,12 @@ function App() {
       if (!newTodo) return;
       event.preventDefault();
       const todoToAdd = {
-        id: makeId,
         title: newTodo,
         isComplete: false,
       };
-      const updatedTodos = [...todos, todoToAdd];
 
-      setTodos(updatedTodos);
-      await addNewTodoToServer(todoToAdd);
+      const newTodoFetched = await addNewTodoToServer(todoToAdd);
+      setTodos((prevTodos) => [...prevTodos, newTodoFetched]);
       setNewTodo("");
     } catch (err) {
       console.error(err);
@@ -139,19 +129,15 @@ function App() {
 
   async function removeTodo(id) {
     try {
-      const updatedTodos = todos.filter((todo) => {
-        return todo.id !== id;
-      });
       await removeTodoFromServer(id);
-      setTodos(updatedTodos);
+      setTodos((prevTodos) => {
+        return prevTodos.filter((todo) => {
+          return todo.id !== id;
+        });
+      });
     } catch (err) {
       console.error(err);
     }
-  }
-
-  function calculateProgress() {
-    if (totalTodos.length === 0) return 0;
-    return (completedTodos / totalTodos) * 100;
   }
 
   //Filters
@@ -183,33 +169,22 @@ function App() {
     filterTodoInputRef.current.value = "";
     setNewFilterInput("");
   }
-  //Greet
-  useEffect(() => {
-    console.log("Hello");
-  }, []);
-  //log after every crud operation and focus
+
+  //Focus
   useEffect(() => {
     newTodoInputRef.current.focus();
-    console.log(todos);
   }, [todos]);
 
   return (
     <>
       <h1>Todos</h1>
       <AddTodoForm
-        newTodoTitleRef={newTodoTitleRef}
         newTodoInputRef={newTodoInputRef}
         newTodo={newTodo}
         handleNewTodoChange={handleNewTodoChange}
         addNewTodo={addNewTodo}
       />
-      <TodoStatistics
-        activeTodos={activeTodos}
-        completedTodos={completedTodos}
-        totalTodos={totalTodos}
-        calculateProgress={calculateProgress}
-      />
-      {todos.length === 0 ? <p>"No todos available"</p> : null}
+
       <FilterTodos
         newFilterInput={newFilterInput}
         filterTodoInputRef={filterTodoInputRef}
@@ -218,11 +193,15 @@ function App() {
         filterByCompleted={filterByCompleted}
         filterByActive={filterByActive}
       />
-      <TodoList
-        removeTodo={removeTodo}
-        todos={filteredItems}
-        updateIsComplete={updateIsComplete}
-      />
+      <div className="grid-group todos-main-container">
+        <TodoStatistics todos={todos} />
+        <TodoList
+          loading={loading}
+          removeTodo={removeTodo}
+          todos={filteredItems}
+          updateIsComplete={updateIsComplete}
+        />
+      </div>
     </>
   );
 }

@@ -39,7 +39,7 @@ export default function FilterTodos(props) {
             }}
             type="text"
           />
-          <i class="fa-solid fa-magnifying-glass"></i>
+          <i className="fa-solid fa-magnifying-glass"></i>
         </div>
       </div>
     </>

@@ -8,12 +8,12 @@
     {
       "id": "2",
       "title": "Build a Todo App",
-      "isComplete": true
+      "isComplete": false
     },
     {
       "id": "3",
       "title": "Read JavaScript Documentation",
-      "isComplete": false
+      "isComplete": true
     },
     {
       "id": "4",
@@ -23,17 +23,17 @@
     {
       "id": "5",
       "title": "Implement Context",
-      "isComplete": false
+      "isComplete": true
     },
     {
       "id": "6",
       "title": "Create Portfolio Website",
-      "isComplete": true
+      "isComplete": false
     },
     {
       "id": "7",
       "title": "Learn TypeScript",
-      "isComplete": true
+      "isComplete": false
     },
     {
       "id": "8",
@@ -43,16 +43,11 @@
     {
       "id": "9",
       "title": "Optimize Performance",
-      "isComplete": true
-    },
-    {
-      "id": "10",
-      "title": "Deploy to Production",
       "isComplete": false
     },
     {
-      "id": "5cdc",
-      "title": "eden",
+      "id": "433d",
+      "title": "Deploy to Production",
       "isComplete": false
     }
   ]

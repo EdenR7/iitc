@@ -14,7 +14,7 @@ export default function TodoItem(props) {
             name="check-input"
             checked={todo.isComplete}
             onChange={() => {
-              props.updateIsComplete(todo.id);
+              props.updateIsComplete(todo);
             }}
             type="checkbox"
             className="checkbox-element"
@@ -30,7 +30,7 @@ export default function TodoItem(props) {
         onClick={() => {
           props.removeTodo(todo.id);
         }}
-        className="btn remove-todo"
+        className="remove-todo"
       >
         <i className="fa-solid fa-xmark"></i>
       </button>
