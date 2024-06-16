@@ -27,7 +27,7 @@ export const theme = createTheme({
 const allLabels = ["home", "work", "learnings", "friends", "family"];
 
 export default function AddTodoForm(props) {
-  console.log(props.newTodo.labels);
+  const curChips = props.newTodo.labels;
   return (
     <form
       onSubmit={(event) => {
@@ -52,7 +52,14 @@ export default function AddTodoForm(props) {
         chips={allLabels}
         clickable={true}
         selectedChips={props.newTodo.labels}
-        onChipClick={(chip)=>{console.log(chip)}}
+        onChipClick={(chip) => {
+          const newChips = curChips.includes(chip)
+            ? curChips.filter((item) => item !== chip)
+            : [...curChips, chip];
+          props.setNewTodo((prev) => {
+            return { ...prev, labels: newChips };
+          });
+        }}
       />
       {/* <input
         ref={props.newTodoInputRef}

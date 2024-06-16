@@ -101,16 +101,25 @@ input {
 
 /* Add new */
 .new-todo-form {
-  /* width: 335px; */
+  flex-direction: column;
+  margin-inline: auto;
+  max-width: 500px;
   margin-top: 1rem;
-  align-items: center;
+  /* align-items: center; */
   justify-content: center;
   gap: 0.25rem;
 }
 #new-todo-name {
   flex: 1;
 }
-
+.new-todo-form input {
+  margin-block: auto;
+}
+.new-todo-form button {
+  margin: auto;
+  max-width: 60px;
+  max-height: 40px;
+}
 .todos-main-container {
   max-width: 1200px;
   grid-template-columns: 1fr;
@@ -176,7 +185,7 @@ input {
   gap: 1rem;
   flex: 1;
 }
-.todo-title{
+.todo-title {
   width: 40%;
 }
 .completed {
@@ -265,6 +274,8 @@ input {
 }
 @media (min-width: 540px) {
   .new-todo-form {
+    align-items: center;
+    flex-direction: row;
     justify-content: center;
     width: auto;
   }

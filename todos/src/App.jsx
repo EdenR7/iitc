@@ -11,7 +11,6 @@ import Alert from "@mui/material/Alert";
 import { AppBar } from "@mui/material";
 import TodosAppBar from "./app_components/AppBar";
 import DrawerAppBar from "./app_components/AppBar";
-import ChipsList from "./app_components/ChipsList";
 
 const todosUrl = "http://localhost:8001/todos";
 // Define your custom theme
@@ -19,7 +18,7 @@ const todosUrl = "http://localhost:8001/todos";
 function App() {
   // STATES
   const [todos, setTodos] = useState([]); //All todos state
-  const [newTodo, setNewTodo] = useState({ title: "", labels: ["home"] }); // Add new todo input state
+  const [newTodo, setNewTodo] = useState({ title: "", labels: [] }); // Add new todo input state
   const [newFilterInput, setNewFilterInput] = useState(""); // Filter search input state
   const [filterOnActive, setFilterOnActive] = useState(false); // State for filter by active
   const [filterOnComplete, setFilterOnComplete] = useState(false); // State for filter by complete
@@ -155,12 +154,12 @@ function App() {
       if (!newTodo) return;
       event.preventDefault();
       const todoToAdd = {
-        title: newTodo,
+        ...newTodo,
         isComplete: false,
       };
       const newTodoFetched = await addNewTodoToServer(todoToAdd);
       setTodos((prevTodos) => [...prevTodos, newTodoFetched]);
-      setNewTodo("");
+      setNewTodo({ title: "", labels: [] });
       setOpenSnackBar((prev) => {
         return {
           ...prev,
@@ -253,7 +252,6 @@ function App() {
     console.log(todos);
   }, [todos]);
 
-
   return (
     <>
       <DrawerAppBar />
@@ -272,6 +270,7 @@ function App() {
       <AddTodoForm
         newTodoInputRef={newTodoInputRef}
         newTodo={newTodo}
+        setNewTodo={setNewTodo}
         handleNewTodoChange={handleNewTodoChange}
         addNewTodo={addNewTodo}
       />

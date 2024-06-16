@@ -41,7 +41,7 @@ export default function TodoItem(props) {
         <h3 className={`${todo.isComplete ? "completed" : ""} todo-title`}>
           {todo.title}
         </h3>
-        <ChipsList chips={todo.labels} clickable={false} onChipClick />
+        <ChipsList chips={todo.labels} clickable={false} />
       </div>
       <Tooltip title="Delete Todo">
         <IconButton
