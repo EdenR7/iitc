@@ -3,52 +3,62 @@
     {
       "id": "1",
       "title": "Learn React",
-      "isComplete": false
+      "isComplete": false,
+      "labels":["home","learnings"]
     },
     {
       "id": "2",
       "title": "Build a Todo App",
-      "isComplete": false
+      "isComplete": true,
+      "labels":["family","home"]
     },
     {
       "id": "3",
       "title": "Read JavaScript Documentation",
-      "isComplete": true
+      "isComplete": false,
+      "labels":["work","learnings"]
     },
     {
       "id": "4",
       "title": "Write Unit Tests",
-      "isComplete": true
+      "isComplete": false,
+      "labels":["friends","work"]
     },
     {
       "id": "5",
       "title": "Implement Context",
-      "isComplete": true
+      "isComplete": false,
+      "labels":["home","friends"]
     },
     {
       "id": "6",
       "title": "Create Portfolio Website",
-      "isComplete": false
+      "isComplete": true,
+      "labels":["work","friends"]
     },
     {
       "id": "7",
       "title": "Learn TypeScript",
-      "isComplete": false
+      "isComplete": true,
+      "labels":["learnings","home"]
     },
     {
       "id": "8",
       "title": "Refactor Codebase",
-      "isComplete": false
+      "isComplete": false,
+      "labels":["work","family"]
     },
     {
       "id": "9",
       "title": "Optimize Performance",
-      "isComplete": false
+      "isComplete": true,
+      "labels":["family","work"]
     },
     {
       "id": "433d",
       "title": "Deploy to Production",
-      "isComplete": false
+      "isComplete": true,
+      "labels":["family","work"]
     }
   ]
 }

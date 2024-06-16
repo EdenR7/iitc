@@ -21,6 +21,7 @@ body {
   color: var(--clr-primary-800);
   font-family: "Open Sans", sans-serif;
   padding: 1rem;
+  padding-top: 6rem;
 }
 .flex-group {
   display: flex;
@@ -100,9 +101,10 @@ input {
 
 /* Add new */
 .new-todo-form {
-  width: 335px;
+  /* width: 335px; */
   margin-top: 1rem;
   align-items: center;
+  justify-content: center;
   gap: 0.25rem;
 }
 #new-todo-name {
@@ -172,6 +174,10 @@ input {
 .todo-details-wrapper {
   align-items: center;
   gap: 1rem;
+  flex: 1;
+}
+.todo-title{
+  width: 40%;
 }
 .completed {
   color: var(--clr-neutral-200);
@@ -193,7 +199,7 @@ input {
   scale: 1.2;
 }
 
-/* Checkbox design */
+/* Checkbox design
 .toggle-wrapper {
   cursor: pointer;
   position: relative;
@@ -223,7 +229,7 @@ input {
 .checkbox-element:checked + .slider {
   transform: translateX(1.25rem);
   background-color: var(--clr-neutral-200);
-}
+} */
 
 /* Filter */
 .filter-container {
@@ -232,12 +238,12 @@ input {
   gap: 1rem;
 }
 .filter-btns {
-  gap: 0.5rem;
+  gap: 2.8rem;
 }
 .search-warpper {
   align-items: center;
   background-color: var(--clr-neutral-100);
-  width: 20rem;
+  width: 15rem;
   border: 1px solid var(--clr-primary-700);
 }
 .search-warpper i {
@@ -249,6 +255,13 @@ input {
   border: 0;
   border-radius: 4px;
   flex: 1;
+}
+.MuiOutlinedInput-notchedOutline.css-1d3z3hw-MuiOutlinedInput-notchedOutline {
+  /* border: 0; */
+}
+.loader {
+  flex-direction: column;
+  gap: 0;
 }
 @media (min-width: 540px) {
   .new-todo-form {
@@ -269,9 +282,8 @@ input {
     grid-column-start: 1fr;
   } */
 }
-@media (min-width: 680px) {
+@media (min-width: 600px) {
   body {
-    padding: 4rem;
+    padding-left: 4rem;
   }
-
 }

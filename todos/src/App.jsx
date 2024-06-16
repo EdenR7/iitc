@@ -1,19 +1,39 @@
 import React, { useEffect, useState, useRef, useMemo } from "react";
+
 import axios from "axios";
 import TodoStatistics from "./app_components/todoStatistics";
 import { TodoList } from "./app_components/todoList";
 import AddTodoForm from "./app_components/addTodoForm";
 import FilterTodos from "./app_components/filterTodos";
+// import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
+import { AppBar } from "@mui/material";
+import TodosAppBar from "./app_components/AppBar";
+import DrawerAppBar from "./app_components/AppBar";
+import ChipsList from "./app_components/ChipsList";
+
 const todosUrl = "http://localhost:8001/todos";
+// Define your custom theme
 
 function App() {
   // STATES
   const [todos, setTodos] = useState([]); //All todos state
-  const [newTodo, setNewTodo] = useState(""); // Add new todo input state
+  const [newTodo, setNewTodo] = useState({ title: "", labels: ["home"] }); // Add new todo input state
   const [newFilterInput, setNewFilterInput] = useState(""); // Filter search input state
   const [filterOnActive, setFilterOnActive] = useState(false); // State for filter by active
   const [filterOnComplete, setFilterOnComplete] = useState(false); // State for filter by complete
   const [loading, setLoading] = useState(false);
+  const [openSnackBar, setOpenSnackBar] = useState({
+    open: false,
+    transition: "SlideTransition",
+    alertSeverity: "success",
+    hideDuration: 1500,
+    message: "",
+    closeSnack: () => {
+      setOpenSnackBar({ ...openSnackBar, open: false });
+    },
+  });
 
   //USE_REFS
   const newTodoInputRef = useRef(null);
@@ -101,13 +121,33 @@ function App() {
           return todo;
         });
       });
+      setOpenSnackBar((prev) => {
+        return {
+          ...prev,
+          open: true,
+          alertSeverity: "success",
+          hideDuration: 1500,
+          message: `"${todoToUpdate.title}" status changed!`,
+        };
+      });
     } catch (err) {
+      setOpenSnackBar((prev) => {
+        return {
+          ...prev,
+          open: true,
+          alertSeverity: "error",
+          hideDuration: 1500,
+          message: `Failed to change status`,
+        };
+      });
       console.error(err);
     }
   }
   function handleNewTodoChange(event) {
     event.preventDefault();
-    setNewTodo(event.target.value);
+    setNewTodo((prev) => {
+      return { ...prev, title: event.target.value };
+    });
   }
 
   async function addNewTodo(event) {
@@ -118,11 +158,28 @@ function App() {
         title: newTodo,
         isComplete: false,
       };
-
       const newTodoFetched = await addNewTodoToServer(todoToAdd);
       setTodos((prevTodos) => [...prevTodos, newTodoFetched]);
       setNewTodo("");
+      setOpenSnackBar((prev) => {
+        return {
+          ...prev,
+          open: true,
+          alertSeverity: "success",
+          hideDuration: 1500,
+          message: `"${newTodoFetched.title}" Todo Added!`,
+        };
+      });
     } catch (err) {
+      setOpenSnackBar((prev) => {
+        return {
+          ...prev,
+          open: true,
+          alertSeverity: "error",
+          hideDuration: 1500,
+          message: `Failed to add "${newTodo.title}"`,
+        };
+      });
       console.error(err);
     }
   }
@@ -130,12 +187,32 @@ function App() {
   async function removeTodo(id) {
     try {
       await removeTodoFromServer(id);
+      let removedTodoTitle;
       setTodos((prevTodos) => {
         return prevTodos.filter((todo) => {
+          if (todo.id === id) removedTodoTitle = todo.title;
           return todo.id !== id;
         });
       });
+      setOpenSnackBar((prev) => {
+        return {
+          ...prev,
+          open: true,
+          alertSeverity: "success",
+          hideDuration: 1500,
+          message: `"${removedTodoTitle}" Removed successfully!`,
+        };
+      });
     } catch (err) {
+      setOpenSnackBar((prev) => {
+        return {
+          ...prev,
+          open: true,
+          alertSeverity: "error",
+          hideDuration: 1500,
+          message: `Error in delete proccess !`,
+        };
+      });
       console.error(err);
     }
   }
@@ -173,11 +250,25 @@ function App() {
   //Focus
   useEffect(() => {
     newTodoInputRef.current.focus();
+    console.log(todos);
   }, [todos]);
+
 
   return (
     <>
+      <DrawerAppBar />
       <h1>Todos</h1>
+      <Snackbar
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+        autoHideDuration={openSnackBar.hideDuration}
+        open={openSnackBar.open}
+        message={openSnackBar.message}
+        onClose={openSnackBar.closeSnack}
+      >
+        <Alert severity={openSnackBar.alertSeverity}>
+          {openSnackBar.message}
+        </Alert>
+      </Snackbar>
       <AddTodoForm
         newTodoInputRef={newTodoInputRef}
         newTodo={newTodo}
