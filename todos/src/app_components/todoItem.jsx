@@ -44,22 +44,22 @@ export default function TodoItem(props) {
         <ChipsList chips={todo.labels} clickable={false} />
       </div>
       <Tooltip title="Delete Todo">
-        <IconButton
+        <button
+          onClick={() => {
+            props.removeTodo(todo.id);
+          }}
+          className="remove-todo"
+        >
+          <DeleteIcon />
+        </button>
+        {/* <IconButton
           onClick={() => {
             props.removeTodo(todo.id);
           }}
         >
           <DeleteIcon />
-        </IconButton>
+        </IconButton> */}
       </Tooltip>
-      {/* <button
-        onClick={() => {
-          props.removeTodo(todo.id);
-        }}
-        className="remove-todo"
-      >
-        <i className="fa-solid fa-xmark"></i>
-      </button> */}
     </li>
   );
 }

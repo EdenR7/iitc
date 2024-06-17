@@ -2,7 +2,6 @@ import React from "react";
 import Chip from "@mui/material/Chip";
 import Box from "@mui/material/Box";
 
-
 export default function ChipsList(props) {
   const { chips, clickable, onChipClick, selectedChips } = props;
   return (
@@ -20,6 +19,11 @@ export default function ChipsList(props) {
           key={index}
           label={chip}
           clickable={clickable}
+          variant={
+            selectedChips && selectedChips.includes(chip)
+              ? "filled"
+              : "outlined"
+          }
           color={
             selectedChips && selectedChips.includes(chip)
               ? "primary"

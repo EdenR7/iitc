@@ -35,7 +35,7 @@ export default function AddTodoForm(props) {
       }}
       className="flex-group new-todo-form"
     >
-      <TextField
+      {/* <TextField
         inputRef={props.newTodoInputRef}
         onChange={(event) => {
           props.handleNewTodoChange(event);
@@ -47,6 +47,16 @@ export default function AddTodoForm(props) {
         sx={{
           color: "success.main",
         }}
+      /> */}
+      <input
+        ref={props.newTodoInputRef}
+        onChange={(event) => {
+          props.handleNewTodoChange(event);
+        }}
+        value={props.newTodo.title}
+        id="new-todo-name"
+        type="text"
+        placeholder="New Todo ..."
       />
       <ChipsList
         chips={allLabels}
@@ -61,17 +71,8 @@ export default function AddTodoForm(props) {
           });
         }}
       />
-      {/* <input
-        ref={props.newTodoInputRef}
-        onChange={(event) => {
-          props.handleNewTodoChange(event);
-        }}
-        value={props.newTodo}
-        id="new-todo-name"
-        type="text"
-        placeholder="New Todo ..."
-      /> */}
-      <ThemeProvider theme={theme}>
+
+      {/* <ThemeProvider theme={theme}>
         <Button
           className=".custom-button btn"
           variant="contained"
@@ -79,11 +80,11 @@ export default function AddTodoForm(props) {
         >
           <AddIcon />
         </Button>
-      </ThemeProvider>
+      </ThemeProvider> */}
 
-      {/* <button className="btn" type="submit">
-        Add New Todo
-      </button> */}
+      <button className="btn" type="submit">
+        <AddIcon />
+      </button>
     </form>
   );
 }
