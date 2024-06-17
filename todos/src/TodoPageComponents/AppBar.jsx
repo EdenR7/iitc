@@ -12,6 +12,8 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 //Breakpoints :
 // {
@@ -41,22 +43,14 @@ export default function DrawerAppBar(props) {
       <List>
         <ListItem disablePadding>
           <ListItemButton sx={{ textAlign: "center" }}>
-            <ListItemText primary="Home" />
-          </ListItemButton>
-        </ListItem>
-        <ListItem disablePadding>
-          <ListItemButton sx={{ textAlign: "center" }}>
-            <ListItemText primary="About" />
+            <NavLink to="/">
+              <ListItemText primary="Home" />
+            </NavLink>
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
           <ListItemButton sx={{ textAlign: "center" }}>
             <ListItemText primary="Todo" />
-          </ListItemButton>
-        </ListItem>
-        <ListItem disablePadding>
-          <ListItemButton sx={{ textAlign: "center" }}>
-            <ListItemText primary="Activity" />
           </ListItemButton>
         </ListItem>
       </List>
@@ -103,6 +97,29 @@ export default function DrawerAppBar(props) {
           </Typography>
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
             <Button
+              component={Link}
+              to="/"
+              sx={{
+                color: "#fff",
+                "&:hover": { color: "hsl(18, 74%, 66%)" },
+              }}
+            >
+              Home
+            </Button>
+              <Button
+                component={Link}
+                to="/todo"
+                sx={{
+                  color: "#fff",
+                  "&:hover": { color: "hsl(18, 74%, 66%)" },
+                }}
+              >
+                Todo
+              </Button>
+            {/* <Button component={Link} to="/">
+              Home
+            </Button> */}
+            {/* <Button
               sx={{ color: "#fff", "&:hover": { color: "hsl(18, 74%, 66%)" } }}
             >
               Home
@@ -110,18 +127,8 @@ export default function DrawerAppBar(props) {
             <Button
               sx={{ color: "#fff", "&:hover": { color: "hsl(18, 74%, 66%)" } }}
             >
-              About
-            </Button>
-            <Button
-              sx={{ color: "#fff", "&:hover": { color: "hsl(18, 74%, 66%)" } }}
-            >
               Todo
-            </Button>
-            <Button
-              sx={{ color: "#fff", "&:hover": { color: "hsl(18, 74%, 66%)" } }}
-            >
-              Activity
-            </Button>
+            </Button> */}
           </Box>
         </Toolbar>
       </AppBar>

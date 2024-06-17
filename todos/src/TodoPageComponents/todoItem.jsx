@@ -5,13 +5,14 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import ChipsList from "./ChipsList";
+import { Link } from "react-router-dom";
 
 export default function TodoItem(props) {
   const todo = props.todo;
   return (
     <li className="todo-container flex-group">
       <div className="todo-details-wrapper flex-group">
-        <FormControlLabel
+        {/* <FormControlLabel
           control={
             <Switch
               checked={todo.isComplete}
@@ -20,8 +21,8 @@ export default function TodoItem(props) {
               }}
             />
           }
-        />
-        {/* <label
+        /> */}
+        <label
           className={`${
             todo.isComplete ? "completed__toggle-wrapper" : ""
           } toggle-wrapper`}
@@ -36,11 +37,14 @@ export default function TodoItem(props) {
             className="checkbox-element"
           />
           <div className="slider"> </div>
-        </label> */}
+        </label>
 
-        <h3 className={`${todo.isComplete ? "completed" : ""} todo-title`}>
-          {todo.title}
-        </h3>
+        <Link
+          className={`${todo.isComplete ? "completed" : ""} todo-title`}
+          to={todo.id}
+        >
+          {todo.title}{" "}
+        </Link>
         <ChipsList chips={todo.labels} clickable={false} />
       </div>
       <Tooltip title="Delete Todo">
