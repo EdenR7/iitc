@@ -293,19 +293,6 @@ function TodoPage() {
       <Outlet/>
     </>
   );
-  // return (
-  //   <>
-  //     <div>
-  //       <h1>hi</h1>
-  //       <p>TodoPage</p>
-  //       <Link to="1">Product1</Link>
-  //       <br />
-  //       <Link to="2">Product2</Link>
-  //       <br />
-  //       <Link to="create">Create</Link>
-  //     </div>
-  //   </>
-  // );
 }
 
 export default TodoPage;
