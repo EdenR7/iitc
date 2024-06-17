@@ -95,41 +95,12 @@
     {
       "id": "433d",
       "title": "Deploy to Production",
-      "isComplete": true,
+      "isComplete": false,
       "labels": [
         "family",
         "work"
       ],
-      "description": "blah blah blah blah blah blah blah blah"
-    },
-    {
-      "id": "af85",
-      "title": "eden",
-      "isComplete": true,
-      "labels": [
-        "work",
-        "learnings"
-      ],
-      "description": "blah blah blah blah blah blah blah blah"
-    },
-    {
-      "id": "c0fb",
-      "title": "Eden",
-      "isComplete": true,
-      "labels": [
-        "friends"
-      ],
-      "description": "blah blah blah blah blah blah blah blah"
-    },
-    {
-      "id": "efde",
-      "title": "eden",
-      "isComplete": false,
-      "labels": [
-        "home",
-        "family"
-      ],
-      "description": "blah blah blah blah blah blah blah blah"
+      "description": "blah blah blah blah blah blah blah blah eden"
     }
   ]
 }

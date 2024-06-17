@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef, useMemo } from "react";
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 
 import axios from "axios";
 import { TodoList } from "../TodoPageComponents/todoList";
@@ -290,15 +290,7 @@ function TodoPage() {
           updateIsComplete={updateIsComplete}
         />
       </div>
-      {/* <div>
-        <h1>hi</h1>
-        <p>TodoPage</p>
-        <Link to="1">Product1</Link>
-        <br />
-        <Link to="2">Product2</Link>
-        <br />
-        <Link to="create">Create</Link>{" "}
-      </div> */}
+      <Outlet/>
     </>
   );
   // return (

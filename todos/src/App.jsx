@@ -302,6 +302,7 @@ import NotFoundPage from "./pages/NotFoundPage";
 import TodoDetailsPage from "./pages/TodoDetailsPage";
 import CreateTodoPage from "./pages/CreateTodoPage";
 import DrawerAppBar from "./TodoPageComponents/AppBar";
+import TodoLayout from "./pages/TodoLayout";
 
 // function TopNavLink(props) {
 //   const { href, children } = props;
@@ -323,10 +324,12 @@ function App() {
       <DrawerAppBar />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/todo">
+        <Route path="/todo" element={<TodoLayout />}>
           <Route index element={<TodoPage />} />
+          <Route path="create" element={<TodoPage />}>
+            <Route index element={<CreateTodoPage />} />
+          </Route>
           <Route path=":todoId" element={<TodoDetailsPage />} />
-          <Route path="create" element={<CreateTodoPage />} />
         </Route>
         <Route path="/*" element={<NotFoundPage />} />
       </Routes>

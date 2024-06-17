@@ -41,7 +41,7 @@ export default function TodoItem(props) {
 
         <Link
           className={`${todo.isComplete ? "completed" : ""} todo-title`}
-          to={todo.id}
+          to={`/todo/${todo.id}`}
         >
           {todo.title}{" "}
         </Link>
@@ -56,13 +56,6 @@ export default function TodoItem(props) {
         >
           <DeleteIcon />
         </button>
-        {/* <IconButton
-          onClick={() => {
-            props.removeTodo(todo.id);
-          }}
-        >
-          <DeleteIcon />
-        </IconButton> */}
       </Tooltip>
     </li>
   );
