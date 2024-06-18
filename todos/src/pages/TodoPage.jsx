@@ -18,9 +18,9 @@ function TodoPage() {
   // STATES
   const [todos, setTodos] = useState([]); //All todos state
   const [newTodo, setNewTodo] = useState({ title: "", labels: [] }); // Add new todo input state
-  const [newFilterInput, setNewFilterInput] = useState(""); // Filter search input state
-  const [filterOnActive, setFilterOnActive] = useState(false); // State for filter by active
-  const [filterOnComplete, setFilterOnComplete] = useState(false); // State for filter by complete
+  // const [newFilterInput, setNewFilterInput] = useState(""); // Filter search input state
+  // const [filterOnActive, setFilterOnActive] = useState(false); // State for filter by active
+  // const [filterOnComplete, setFilterOnComplete] = useState(false); // State for filter by complete
   const [loading, setLoading] = useState(false);
   const [openSnackBar, setOpenSnackBar] = useState({
     open: false,
@@ -41,6 +41,7 @@ function TodoPage() {
   const byComplete = searchParams.get("byStatus") === "completed";
 
   const location = useLocation();
+  // console.log(location);
   //USE_REFS
   const newTodoInputRef = useRef(null);
   const filterTodoInputRef = useRef(null);
@@ -50,14 +51,15 @@ function TodoPage() {
   const filteredItems = useMemo(() => {
     // this hook specify when It should run the code
     return !byActive && !byComplete //The default, as long as the user didnt press one of the filters buttons
-      ? todos.filter((todo) =>
-          todo.title?.toLowerCase().includes(q?.toLowerCase())
-        )
+      ? todos.filter((todo) => {
+          if (!q) return todos;
+          return todo.title?.toLowerCase().includes(q?.toLowerCase());
+        })
       : byActive // if the user press one of the options it will check which button pressed
       ? todos.filter((todo) => !todo.isComplete)
       : todos.filter((todo) => todo.isComplete);
-  }, [newFilterInput, todos, searchParams]);
-
+  }, [todos, searchParams]);
+  console.log(filteredItems);
   // const filteredItems = useMemo(() => {
   //   // this hook specify when It should run the code
   //   return !filterOnActive && !filterOnComplete //The default, as long as the user didnt press one of the filters buttons
@@ -235,6 +237,7 @@ function TodoPage() {
   }
   //Filters
   function filterByActive() {
+    filterTodoInputRef.current.value = "";
     setSearchParams(
       (prev) => {
         prev.set("q", "");
@@ -247,6 +250,7 @@ function TodoPage() {
     // setFilterOnActive(true);
   }
   function filterByCompleted() {
+    filterTodoInputRef.current.value = "";
     setSearchParams(
       (prev) => {
         prev.set("q", "");
@@ -273,7 +277,7 @@ function TodoPage() {
       });
       // setFilterOnActive(false);
       // setFilterOnComplete(false);
-      setNewFilterInput(filterTodoInputRef.current.value); // The state the rerender the ui according to the search
+      // setNewFilterInput(filterTodoInputRef.current.value); // The state the rerender the ui according to the search
     }, 400);
   }
 
@@ -321,7 +325,7 @@ function TodoPage() {
       />
 
       <FilterTodos
-        newFilterInput={newFilterInput}
+        // newFilterInput={newFilterInput}
         filterTodoInputRef={filterTodoInputRef}
         searchParams={searchParams}
         setSearchParams={setSearchParams}
@@ -346,7 +350,7 @@ function TodoPage() {
 
 export default TodoPage;
 // improve design of statistics
-// reset the query params after click the create link 
+// reset the query params after click the create link
 
 // import React, { useEffect, useState, useRef, useMemo } from "react";
 

@@ -25,6 +25,22 @@ import { Link } from "react-router-dom";
 // }
 
 const drawerWidth = 200;
+function TopNavLink(props) {
+  const { href, children } = props;
+  return (
+    <NavLink
+      className={({ isActive }) => {
+        return isActive ? "current-page" : "";
+      }}
+      // style={({ isActive }) => {
+      //   return isActive ? { color: "salmon" } : {};
+      // }}
+      to={href}
+    >
+      {children}
+    </NavLink>
+  );
+}
 
 export default function DrawerAppBar(props) {
   const { window } = props;
@@ -44,13 +60,15 @@ export default function DrawerAppBar(props) {
         <ListItem disablePadding>
           <ListItemButton sx={{ textAlign: "center" }}>
             <NavLink to="/">
-              <ListItemText primary="Home" />
+              <p>HOME</p>
             </NavLink>
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
           <ListItemButton sx={{ textAlign: "center" }}>
-            <ListItemText primary="Todo" />
+            <NavLink to="/todo">
+              <p>TODO</p>
+            </NavLink>
           </ListItemButton>
         </ListItem>
       </List>
@@ -97,7 +115,7 @@ export default function DrawerAppBar(props) {
           </Typography>
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
             <Button
-              component={Link}
+              component={NavLink}
               to="/"
               sx={{
                 color: "#fff",
@@ -106,29 +124,16 @@ export default function DrawerAppBar(props) {
             >
               Home
             </Button>
-              <Button
-                component={Link}
-                to="/todo"
-                sx={{
-                  color: "#fff",
-                  "&:hover": { color: "hsl(18, 74%, 66%)" },
-                }}
-              >
-                Todo
-              </Button>
-            {/* <Button component={Link} to="/">
-              Home
-            </Button> */}
-            {/* <Button
-              sx={{ color: "#fff", "&:hover": { color: "hsl(18, 74%, 66%)" } }}
-            >
-              Home
-            </Button>
             <Button
-              sx={{ color: "#fff", "&:hover": { color: "hsl(18, 74%, 66%)" } }}
+              component={NavLink}
+              to="/todo"
+              sx={{
+                color: "#fff",
+                "&:hover": { color: "hsl(18, 74%, 66%)" },
+              }}
             >
               Todo
-            </Button> */}
+            </Button>
           </Box>
         </Toolbar>
       </AppBar>

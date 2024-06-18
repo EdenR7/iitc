@@ -1,8 +1,9 @@
 import { Divider } from "@mui/material";
 import React from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useLocation } from "react-router-dom";
 
 function TodoLayout() {
+  const location = useLocation();
   return (
     <>
       <div id="todo-sidebar" className="flex-group">
@@ -10,7 +11,15 @@ function TodoLayout() {
         <Divider sx={{}} />
         <ul className="sidebar-lst flex-group">
           <li>
-            <Link to="create">Create New Todo</Link>
+            <Link
+              to="create"
+              onClick={() => {
+                location.search = "";
+                console.log(location);
+              }}
+            >
+              Create New Todo
+            </Link>
           </li>
           <li>
             <a href="#">Something1</a>

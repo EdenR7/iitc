@@ -36,14 +36,6 @@ function CreateTodoPage() {
     try {
       await axios.post(todosUrl, newTodo);
       closeModal();
-      // const res = await fetch(todosUrl, {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSON.stringify({ ...newTodo }),
-      // });
-      // return await res.json();
     } catch (error) {
       throw error;
     }

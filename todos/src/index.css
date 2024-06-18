@@ -105,6 +105,9 @@ textarea {
 .no-todos {
   margin-top: 2rem;
 }
+.current-page{
+  color: var(--clr-primary-300);
+}
 
 /* Add new */
 .new-todo-form {
