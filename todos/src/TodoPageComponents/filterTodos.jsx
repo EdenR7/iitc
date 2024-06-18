@@ -94,13 +94,6 @@ export default function FilterTodos(props) {
           </ThemeProvider>
         </div>
         <div className="search-warpper flex-group">
-          {/* <ThemeProvider theme={theme}>
-            <TextField
-              id="outlined-search"
-              label="Search desired Todo ..."
-              variant="outlined"
-            />
-          </ThemeProvider> */}
 
           <input
             placeholder="Search desired Todo ..."

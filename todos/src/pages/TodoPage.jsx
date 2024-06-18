@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef, useMemo } from "react";
-import { Link, Outlet, useLocation } from "react-router-dom";
+import { Link, Outlet, useLocation, useSearchParams } from "react-router-dom";
 
 import axios from "axios";
 import { TodoList } from "../TodoPageComponents/todoList";
@@ -32,6 +32,13 @@ function TodoPage() {
       setOpenSnackBar({ ...openSnackBar, open: false });
     },
   });
+  const [searchParams, setSearchParams] = useSearchParams({
+    q: "",
+    byStatus: "",
+  });
+  const q = searchParams.get("q");
+  const byActive = searchParams.get("byStatus") === "active";
+  const byComplete = searchParams.get("byStatus") === "completed";
 
   const location = useLocation();
   //USE_REFS
@@ -42,14 +49,25 @@ function TodoPage() {
   //DERIVED STATES
   const filteredItems = useMemo(() => {
     // this hook specify when It should run the code
-    return !filterOnActive && !filterOnComplete //The default, as long as the user didnt press one of the filters buttons
+    return !byActive && !byComplete //The default, as long as the user didnt press one of the filters buttons
       ? todos.filter((todo) =>
-          todo.title.toLocaleLowerCase().includes(newFilterInput.toLowerCase())
+          todo.title?.toLowerCase().includes(q?.toLowerCase())
         )
-      : filterOnActive // if the user press one of the options it will check which button pressed
+      : byActive // if the user press one of the options it will check which button pressed
       ? todos.filter((todo) => !todo.isComplete)
       : todos.filter((todo) => todo.isComplete);
-  }, [newFilterInput, filterOnActive, filterOnComplete, todos]);
+  }, [newFilterInput, todos, searchParams]);
+
+  // const filteredItems = useMemo(() => {
+  //   // this hook specify when It should run the code
+  //   return !filterOnActive && !filterOnComplete //The default, as long as the user didnt press one of the filters buttons
+  //     ? todos.filter((todo) =>
+  //         todo.title.toLowerCase().includes(newFilterInput.toLowerCase())
+  //       )
+  //     : filterOnActive // if the user press one of the options it will check which button pressed
+  //     ? todos.filter((todo) => !todo.isComplete)
+  //     : todos.filter((todo) => todo.isComplete);
+  // }, [newFilterInput, filterOnActive, filterOnComplete, todos]);
 
   //Initialize the todos
   useEffect(() => {
@@ -215,15 +233,30 @@ function TodoPage() {
       console.error(err);
     }
   }
-
   //Filters
   function filterByActive() {
-    setFilterOnComplete(false);
-    setFilterOnActive(true);
+    setSearchParams(
+      (prev) => {
+        prev.set("q", "");
+        prev.set("byStatus", "active");
+        return prev;
+      },
+      { replace: true }
+    );
+    // setFilterOnComplete(false);
+    // setFilterOnActive(true);
   }
   function filterByCompleted() {
-    setFilterOnActive(false);
-    setFilterOnComplete(true);
+    setSearchParams(
+      (prev) => {
+        prev.set("q", "");
+        prev.set("byStatus", "completed");
+        return prev;
+      },
+      { replace: true }
+    );
+    // setFilterOnActive(false);
+    // setFilterOnComplete(true);
   }
 
   function handleSearchTodoChange() {
@@ -233,17 +266,30 @@ function TodoPage() {
   function debounce() {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
     timeoutRef.current = setTimeout(() => {
-      setFilterOnActive(false);
-      setFilterOnComplete(false);
+      setSearchParams((prev) => {
+        prev.set("q", filterTodoInputRef.current.value);
+        prev.set("byStatus", "");
+        return prev;
+      });
+      // setFilterOnActive(false);
+      // setFilterOnComplete(false);
       setNewFilterInput(filterTodoInputRef.current.value); // The state the rerender the ui according to the search
     }, 400);
   }
 
   function resetFilters() {
-    setFilterOnComplete(false);
-    setFilterOnActive(false);
+    setSearchParams(
+      (prev) => {
+        prev.set("q", "");
+        prev.set("byStatus", "");
+        return prev;
+      },
+      { replace: true }
+    );
+    // setFilterOnComplete(false);
+    // setFilterOnActive(false);
     filterTodoInputRef.current.value = "";
-    setNewFilterInput("");
+    // setNewFilterInput("");
   }
 
   //Focus
@@ -277,6 +323,8 @@ function TodoPage() {
       <FilterTodos
         newFilterInput={newFilterInput}
         filterTodoInputRef={filterTodoInputRef}
+        searchParams={searchParams}
+        setSearchParams={setSearchParams}
         handleSearchTodoChange={handleSearchTodoChange}
         resetFilters={resetFilters}
         filterByCompleted={filterByCompleted}
