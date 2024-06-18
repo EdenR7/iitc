@@ -24,13 +24,13 @@
     {
       "id": "3",
       "title": "Read JavaScript Documentation",
-      "isComplete": true,
+      "isComplete": false,
       "labels": [
-        "work",
         "learnings",
-        "friends"
+        "friends",
+        "home"
       ],
-      "description": "blah blah blah blah blah blah blah blah"
+      "description": "blah blah"
     },
     {
       "id": "4",

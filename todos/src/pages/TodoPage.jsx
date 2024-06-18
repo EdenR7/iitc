@@ -345,6 +345,9 @@ function TodoPage() {
 }
 
 export default TodoPage;
+// improve design of statistics
+// reset the query params after click the create link 
+
 // import React, { useEffect, useState, useRef, useMemo } from "react";
 
 // import axios from "axios";
