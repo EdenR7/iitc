@@ -52,7 +52,7 @@ function TodoPage() {
     // this hook specify when It should run the code
     return !byActive && !byComplete //The default, as long as the user didnt press one of the filters buttons
       ? todos.filter((todo) => {
-          if (!q) return todos;
+          if (!q) return todo;
           return todo.title?.toLowerCase().includes(q?.toLowerCase());
         })
       : byActive // if the user press one of the options it will check which button pressed
