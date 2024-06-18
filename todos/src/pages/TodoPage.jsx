@@ -41,7 +41,6 @@ function TodoPage() {
   const byComplete = searchParams.get("byStatus") === "completed";
 
   const location = useLocation();
-  // console.log(location);
   //USE_REFS
   const newTodoInputRef = useRef(null);
   const filterTodoInputRef = useRef(null);
@@ -59,7 +58,6 @@ function TodoPage() {
       ? todos.filter((todo) => !todo.isComplete)
       : todos.filter((todo) => todo.isComplete);
   }, [todos, searchParams]);
-  console.log(filteredItems);
   // const filteredItems = useMemo(() => {
   //   // this hook specify when It should run the code
   //   return !filterOnActive && !filterOnComplete //The default, as long as the user didnt press one of the filters buttons
@@ -323,26 +321,26 @@ function TodoPage() {
         handleNewTodoChange={handleNewTodoChange}
         addNewTodo={addNewTodo}
       />
-
-      <FilterTodos
-        // newFilterInput={newFilterInput}
-        filterTodoInputRef={filterTodoInputRef}
-        searchParams={searchParams}
-        setSearchParams={setSearchParams}
-        handleSearchTodoChange={handleSearchTodoChange}
-        resetFilters={resetFilters}
-        filterByCompleted={filterByCompleted}
-        filterByActive={filterByActive}
-      />
-      <div className="grid-group todos-main-container">
+      <div className="flex-group" id="filter-statistics-container">
         <TodoStatistics todos={todos} />
-        <TodoList
-          loading={loading}
-          removeTodo={removeTodo}
-          todos={filteredItems}
-          updateIsComplete={updateIsComplete}
+        <FilterTodos
+          // newFilterInput={newFilterInput}
+          filterTodoInputRef={filterTodoInputRef}
+          searchParams={searchParams}
+          setSearchParams={setSearchParams}
+          handleSearchTodoChange={handleSearchTodoChange}
+          resetFilters={resetFilters}
+          filterByCompleted={filterByCompleted}
+          filterByActive={filterByActive}
         />
       </div>
+
+      <TodoList
+        loading={loading}
+        removeTodo={removeTodo}
+        todos={filteredItems}
+        updateIsComplete={updateIsComplete}
+      />
       <Outlet />
     </>
   );

@@ -105,8 +105,15 @@ textarea {
 .no-todos {
   margin-top: 2rem;
 }
-.current-page{
+.current-page {
   color: var(--clr-primary-300);
+}
+#todos-sidebar-btn {
+  position: fixed;
+  top: 20%;
+  z-index: 100;
+  right: 0;
+  background-color: var(--clr-neutral-400);
 }
 
 /* Add new */
@@ -131,9 +138,12 @@ textarea {
   max-width: 60px;
   max-height: 40px;
 }
-.todos-main-container {
+/* .todos-main-container {
   max-width: 1200px;
   grid-template-columns: 1fr;
+} */
+#filter-statistics-container {
+  flex-direction: column;
 }
 
 /* Statistics */
@@ -185,7 +195,7 @@ textarea {
   align-items: center;
   position: relative;
   /* min-width: 350px; */
-  max-width: 800px;
+  max-width: 1000px;
   gap: 1rem;
   border: 1px solid var(--clr-primary-700);
   padding: 1rem;
@@ -432,9 +442,9 @@ textarea {
   #new-todo-name {
     flex: 0;
   }
-  .todos-main-container {
+  /* .todos-main-container {
     grid-template-columns: 1fr 0.5fr;
-  }
+  } */
   .todos-lst {
     grid-column-start: 1;
     grid-row-start: 1;
@@ -449,5 +459,16 @@ textarea {
   }
   #todo-sidebar {
     position: fixed;
+  }
+  #filter-statistics-container {
+    flex-direction: row;
+    align-items: center;
+    gap: 4rem;
+  }
+  .filter-container{
+    order: 1;
+  }
+  .statistics-container{
+    order: 2;
   }
 }
