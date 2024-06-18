@@ -347,7 +347,7 @@ textarea {
   padding: 1rem;
   right: 0;
   top: 4.5rem;
-  max-width: 170px;
+  max-width: 200px;
   gap: 0.25rem;
   z-index: 100;
 }
@@ -357,7 +357,7 @@ textarea {
   align-items: center;
 }
 .sidebar-lst li {
-  padding-block: 0.25rem;
+  padding-block: 0.5rem;
   position: relative;
   text-align: center;
   width: 100%;
@@ -374,10 +374,49 @@ textarea {
   bottom: 0;
   left: 0;
   background-color: var(--clr-neutral-400);
+  opacity: 0.2;
 }
 .sidebar-lst li a {
   text-decoration: none;
   color: inherit;
+}
+/* MODAL */
+#close-modal {
+  position: absolute;
+  right: 8px;
+  top: 8px;
+}
+#close-modal svg {
+  width: 1.25rem;
+}
+#close-modal svg:hover {
+  scale: 1.1;
+}
+#close-modal svg:active {
+  transform: translateY(2px);
+}
+#form-create-new-todo {
+  margin-top: 1rem;
+  flex-direction: column;
+  gap: 1rem;
+}
+#form-create-new-todo .form-group {
+  flex-direction: column;
+  gap: 0.5rem;
+}
+#form-create-new-todo label {
+  color: var(--clr-primary-300);
+  font-weight: 700;
+}
+#form-create-new-todo .form-group:last-child {
+  align-items: end;
+  margin-right: 1rem;
+}
+#submit-create-todo {
+  display: flex;
+  align-items: center;
+  max-width: 50px;
+  max-height: 30px;
 }
 
 @media (min-width: 540px) {

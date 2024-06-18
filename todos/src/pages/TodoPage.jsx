@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef, useMemo } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useLocation } from "react-router-dom";
 
 import axios from "axios";
 import { TodoList } from "../TodoPageComponents/todoList";
@@ -12,7 +12,7 @@ import { AppBar } from "@mui/material";
 // import TodosAppBar from "./app_components/AppBar";
 import DrawerAppBar from "../TodoPageComponents/AppBar";
 
-const todosUrl = "http://localhost:8001/todos";
+export const todosUrl = "http://localhost:8001/todos";
 
 function TodoPage() {
   // STATES
@@ -33,6 +33,7 @@ function TodoPage() {
     },
   });
 
+  const location = useLocation();
   //USE_REFS
   const newTodoInputRef = useRef(null);
   const filterTodoInputRef = useRef(null);
@@ -53,7 +54,7 @@ function TodoPage() {
   //Initialize the todos
   useEffect(() => {
     getTodos();
-  }, []);
+  }, [location.pathname]);
   async function getTodos() {
     try {
       setLoading(true);
@@ -290,7 +291,7 @@ function TodoPage() {
           updateIsComplete={updateIsComplete}
         />
       </div>
-      <Outlet/>
+      <Outlet />
     </>
   );
 }

@@ -10,7 +10,7 @@ function TodoLayout() {
         <Divider sx={{}} />
         <ul className="sidebar-lst flex-group">
           <li>
-            <Link to="create">Create</Link>
+            <Link to="create">Create New Todo</Link>
           </li>
           <li>
             <a href="#">Something1</a>
@@ -26,3 +26,4 @@ function TodoLayout() {
 }
 
 export default TodoLayout;
+// fix the responsive small issues

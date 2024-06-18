@@ -150,7 +150,7 @@ export function EditTodoForm(props) {
   );
 }
 
-const allLabels = ["home", "work", "learnings", "friends", "family"];
+export const allLabels = ["home", "work", "learnings", "friends", "family"];
 
 function TodoDetailsPage() {
   const { todoId } = useParams();
@@ -160,8 +160,8 @@ function TodoDetailsPage() {
 
   const curChips = editedTodo.labels;
   const navigate = useNavigate();
-  //Sever CRUD:
 
+  //Sever CRUD:
   async function removeTodoFromServer() {
     try {
       await axios.delete(todosUrl + editedTodo.id);
