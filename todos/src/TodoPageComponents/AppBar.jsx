@@ -86,7 +86,7 @@ export default function DrawerAppBar(props) {
     >
       <AppBar
         sx={{
-          paddingInline: { xs: 0, sm: "2rem" },
+          paddingInline: { xs: 0, sm: "2rem", md: "4rem" },
           backgroundColor: "hsl(194, 100%, 24%)",
         }}
         component="nav"

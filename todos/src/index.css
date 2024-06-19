@@ -462,6 +462,7 @@ textarea {
   }
   #filter-statistics-container {
     flex-direction: row;
+    
     align-items: center;
     gap: 4rem;
   }
@@ -470,5 +471,19 @@ textarea {
   }
   .statistics-container{
     order: 2;
+  }
+  #filter-statistics-container {
+    /* flex-direction: column; */
+
+  }  
+}
+@media (min-width: 800px) {
+  #filter-statistics-container {
+    justify-content: center;
+  } 
+}
+@media (min-width: 900px) {
+  body{
+    padding-inline: 6rem;
   }
 }
